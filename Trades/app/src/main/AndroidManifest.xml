@@ -16,10 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".BuySell"
-            android:label="@string/title_activity_buy_sell"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".BuySell"></activity>
     </application>
 
 </manifest>
