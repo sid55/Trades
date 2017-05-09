@@ -4,7 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity {
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+
     public static final String tag = "On Create!"
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -12,4 +17,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i(tag, "onCreate");
     }
+
 }
