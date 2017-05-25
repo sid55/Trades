@@ -11,6 +11,10 @@ public class ProfileEntry {
     //private Image profPic;
 
     //Constructors
+    public ProfileEntry(){
+
+    }
+
     public ProfileEntry(String fName, String lName, String email, int phoneNo){
         this.fName= fName;
         this.lName= lName;
@@ -18,7 +22,7 @@ public class ProfileEntry {
         this.phoneNo= phoneNo;
     }
 
-    //Modifiers
+    //Mutators
     public void setfName(String word){
         this.fName= word;
     }
@@ -34,5 +38,23 @@ public class ProfileEntry {
     public void setPhone(int numb){
         this.phoneNo= numb;
     }
+
+    //Accessors
+    public String getfName(){
+        return fName;
+    }
+
+    public String getlName(){
+        return lName;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public int getPhone(){
+        return phoneNo;
+    }
+
     //use Databaseref.push to generate salted keys
 }
