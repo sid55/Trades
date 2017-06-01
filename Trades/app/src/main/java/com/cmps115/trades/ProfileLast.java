@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 public class ProfileLast extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class ProfileLast extends AppCompatActivity {
     private static final int SELECTED_PICTURE = 100;
     ImageView imageView;
     Button button;
+    Button saveProf;
     Uri imageUri;
 
     @Override
@@ -31,6 +33,28 @@ public class ProfileLast extends AppCompatActivity {
 
         imageView = (ImageView) findViewById(R.id.imageView1);
         button = (Button) findViewById(R.id.button1);
+        saveProf = (Button) findViewById(R.id.button2);
+
+        saveProf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(ProfileLast.this, BuySell.class));
+
+                EditText editFirst = (EditText)findViewById(R.id.editText);
+                String editFirstName = editFirst.getText().toString();
+
+                EditText editLast = (EditText)findViewById(R.id.editText2);
+                String editLastName = editLast.getText().toString();
+
+                EditText email = (EditText)findViewById(R.id.email);
+                String emailName = email.getText().toString();
+
+                EditText phone = (EditText)findViewById(R.id.phone);
+                String phoneName = phone.getText().toString();
+            }
+        });
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
