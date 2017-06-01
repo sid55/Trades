@@ -6,7 +6,7 @@
     tools:context="com.cmps115.trades.ProfileLast">
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/imageSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Image"
@@ -14,11 +14,11 @@
         android:onClick="btnClick"
         android:layout_marginRight="39dp"
         android:layout_marginEnd="39dp"
-        android:layout_alignBottom="@+id/imageView1"
-        android:layout_toLeftOf="@+id/imageView1" />
+        android:layout_alignBottom="@+id/image"
+        android:layout_toLeftOf="@+id/image" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/image"
         android:layout_width="102dp"
         android:layout_height="95dp"
         android:src = "@mipmap/ic_launcher"
@@ -32,45 +32,45 @@
         android:layout_alignParentEnd="true" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="First"
-        android:layout_below="@+id/button1"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignStart="@+id/button1"
-        android:layout_toStartOf="@+id/imageView1"
-        android:layout_alignRight="@+id/button1"
-        android:layout_alignEnd="@+id/button1" />
+        android:layout_below="@+id/imageSubmit"
+        android:layout_alignLeft="@+id/imageSubmit"
+        android:layout_alignStart="@+id/imageSubmit"
+        android:layout_toStartOf="@+id/image"
+        android:layout_alignRight="@+id/imageSubmit"
+        android:layout_alignEnd="@+id/imageSubmit" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/lastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_alignStart="@+id/imageView1"
-        android:layout_alignTop="@+id/editText"
+        android:layout_alignLeft="@+id/image"
+        android:layout_alignStart="@+id/image"
+        android:layout_alignTop="@+id/firstName"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Last"
-        android:layout_alignRight="@+id/imageView1"
-        android:layout_alignEnd="@+id/imageView1" />
+        android:layout_alignRight="@+id/image"
+        android:layout_alignEnd="@+id/image" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
+        android:layout_alignLeft="@+id/firstName"
+        android:layout_alignStart="@+id/firstName"
         android:layout_centerVertical="true"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Email"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_alignRight="@+id/lastName"
+        android:layout_alignEnd="@+id/lastName" />
 
     <EditText
         android:id="@+id/phone"
@@ -87,15 +87,15 @@
         android:layout_alignEnd="@+id/email" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Save Profile"
-        android:layout_below="@+id/phone"
-        android:layout_alignRight="@+id/phone"
         android:layout_alignEnd="@+id/phone"
+        android:layout_alignRight="@+id/phone"
+        android:layout_below="@+id/phone"
+        android:layout_marginEnd="69dp"
         android:layout_marginRight="69dp"
-        android:layout_marginEnd="69dp" />
+        android:layout_marginTop="44dp"
+        android:text="Save Profile" />
 
 </RelativeLayout>

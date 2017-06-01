@@ -33,9 +33,12 @@ public class SellPage extends AppCompatActivity {
         });
     }
 
-    private void writeNewListing(String name, String desc){
+    //Create new listing on the database
+    private String writeNewListing(String name, String desc){
+        String listId;
         ListingEntry listing = new ListingEntry(name, desc);
         mListingRef.push().setValue(listing);
+        return listId = mListingRef.getKey();
     }
 
 
@@ -60,7 +63,8 @@ public class SellPage extends AppCompatActivity {
             public void onClick(View view){
                 String lName = vSkill.getText().toString();
                 String lDesc = vDesc.getText().toString();
-                writeNewListing(lName, lDesc);
+                String key;
+                key = writeNewListing(lName, lDesc);
             }
         });
     }

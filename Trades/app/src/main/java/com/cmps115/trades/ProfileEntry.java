@@ -1,10 +1,14 @@
 package com.cmps115.trades;
 
+import android.graphics.Bitmap;
+
 public class ProfileEntry {
     private String fName;
     private String lName;
     private String email;
-    private int phoneNo;
+    //Change to int
+    private String phoneNo;
+    private Bitmap profPic;
 
     //Need to make data struct for an array of skills
     //private String skills;
@@ -15,11 +19,12 @@ public class ProfileEntry {
 
     }
 
-    public ProfileEntry(String fName, String lName, String email, int phoneNo){
+    public ProfileEntry(String fName, String lName, String email, String phoneNo, Bitmap profPic){
         this.fName= fName;
         this.lName= lName;
         this.email= email;
         this.phoneNo= phoneNo;
+        this.profPic= profPic;
     }
 
     //Mutators
@@ -35,7 +40,7 @@ public class ProfileEntry {
         this.email= word;
     }
 
-    public void setPhone(int numb){
+    public void setPhone(String numb){
         this.phoneNo= numb;
     }
 
@@ -52,7 +57,7 @@ public class ProfileEntry {
         return email;
     }
 
-    public int getPhone(){
+    public String getPhone(){
         return phoneNo;
     }
 
