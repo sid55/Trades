@@ -6,7 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SellPage extends AppCompatActivity {
+
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mProfileRef;
+    private DatabaseReference mListingRef;
 
     public Button submitButton;
     public void initSubmit(){
@@ -26,5 +33,9 @@ public class SellPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_page);
         initSubmit();
+
+        mDatabase = FirebaseDatabase.getInstance();
+        mProfileRef = mDatabase.getReference().child("profiles");
+        mListingRef = mDatabase.getReference().child("listings");
     }
 }
