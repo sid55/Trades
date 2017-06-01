@@ -21,19 +21,6 @@ public class SellPage extends AppCompatActivity {
     private DatabaseReference mProfileRef;
     private DatabaseReference mListingRef;
 
-    public Button submitButton;
-    public void initSubmit(){
-        submitButton = (Button) findViewById(R.id.Submit_Button);
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent showbuysellpage = new Intent(SellPage.this, BuySell.class);
-                startActivity(showbuysellpage);
-            }
-        });
-    }
-
-    //Create new listing on the database
     private String writeNewListing(String name, String desc){
         String listId;
         ListingEntry listing = new ListingEntry(name, desc);
@@ -46,7 +33,6 @@ public class SellPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_page);
-        initSubmit();
 
         //View References
         vSubmit = (Button) findViewById(R.id.Submit_Button);
@@ -63,8 +49,10 @@ public class SellPage extends AppCompatActivity {
             public void onClick(View view){
                 String lName = vSkill.getText().toString();
                 String lDesc = vDesc.getText().toString();
-                String key;
-                key = writeNewListing(lName, lDesc);
+                writeNewListing(lName, lDesc);
+
+                Intent showbuysellpage = new Intent(SellPage.this, BuySell.class);
+                startActivity(showbuysellpage);
             }
         });
     }
