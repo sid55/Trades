@@ -93,4 +93,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_buy_sell">BuySell</string>
     <string name="title_activity_sell">Sell</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_profile_last">ProfileLast</string>
 </resources>
