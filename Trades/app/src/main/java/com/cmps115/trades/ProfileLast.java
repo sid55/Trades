@@ -39,7 +39,6 @@ public class ProfileLast extends AppCompatActivity {
     //Database Refs
     private FirebaseDatabase mDatabase;
     private DatabaseReference mProfileRef;
-    private DatabaseReference mListingRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class ProfileLast extends AppCompatActivity {
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
         mProfileRef = mDatabase.getReference().child("profiles");
-        mListingRef = mDatabase.getReference().child("listings");
 
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
