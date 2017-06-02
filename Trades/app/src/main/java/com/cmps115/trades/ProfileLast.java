@@ -113,6 +113,8 @@ public class ProfileLast extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+
                 startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                 EditText editFirst = (EditText)findViewById(R.id.firstName);
