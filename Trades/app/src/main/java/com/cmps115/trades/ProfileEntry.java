@@ -19,12 +19,11 @@ public class ProfileEntry {
 
     }
 
-    public ProfileEntry(String fName, String lName, String email, String phoneNo, Bitmap profPic){
+    public ProfileEntry(String fName, String lName, String email, String phoneNo){
         this.fName= fName;
         this.lName= lName;
         this.email= email;
         this.phoneNo= phoneNo;
-        this.profPic= profPic;
     }
 
     //Mutators

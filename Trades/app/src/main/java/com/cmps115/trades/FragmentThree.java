@@ -17,9 +17,21 @@ public class FragmentThree extends Fragment {
     private ProgressBar progressBar;
     private int mProgressStatus = 0;
     private Handler mHandler = new Handler();
+    private Button nextBut;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_three, container, false);
+
+        nextBut = (Button) view.findViewById(R.id.button2);
+
+        nextBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(), ProfileLast.class));
+
+            }
+        });
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar3);
         progressBar.setMax(100);

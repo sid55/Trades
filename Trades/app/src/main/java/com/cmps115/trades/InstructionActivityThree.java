@@ -11,8 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class InstructionActivityThree extends FragmentActivity{
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         return inflater.inflate(R.layout.fragment_one,container, false);
     }
@@ -21,6 +26,7 @@ public class InstructionActivityThree extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.instruction_activity_three);
+
     }
 
     @Override
