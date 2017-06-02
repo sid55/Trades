@@ -28,7 +28,7 @@ import com.google.android.gms.common.api.Status;
 import java.util.jar.Attributes;
 
 
-public class LoginPage extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
+public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
 
     private LinearLayout profile;
     private ImageView picture;

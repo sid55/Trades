@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    tools:context="com.cmps115.trades.Login"
     android:weightSum="1">
 
 
@@ -22,7 +22,7 @@
             android:id="@+id/prof_pic"
             android:layout_width="90dp"
             android:layout_height="155dp"
-
+            android:src="@drawable/cool"
 
             />
 

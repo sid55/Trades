@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
-    public static final String tag = "On Create!"
+    public static final String tag = "On Create!";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
