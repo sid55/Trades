@@ -1,4 +1,4 @@
-package com.cmps115.trades;
+package app.src.main.java.com.cmps115.trades;
 
 import android.content.Intent;
 import android.os.Bundle;
