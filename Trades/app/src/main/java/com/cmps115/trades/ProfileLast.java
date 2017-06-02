@@ -100,7 +100,7 @@ public class ProfileLast extends AppCompatActivity {
                 }, 10);
                 return;
             }
-        }else{
+        } else {
             configureButton();
         }
 
@@ -113,23 +113,25 @@ public class ProfileLast extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //Even though there is an error, the permission check is taken care of
+                //at the place the method is called
                 locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
 
                 startActivity(new Intent(ProfileLast.this, BuySell.class));
 
-                EditText editFirst = (EditText)findViewById(R.id.firstName);
+                EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
 
-                EditText editLast = (EditText)findViewById(R.id.lastName);
+                EditText editLast = (EditText) findViewById(R.id.lastName);
                 editLastName = editLast.getText().toString();
 
-                EditText email = (EditText)findViewById(R.id.email);
+                EditText email = (EditText) findViewById(R.id.email);
                 emailName = email.getText().toString();
 
-                EditText phone = (EditText)findViewById(R.id.phone);
+                EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-                ProfileEntry newUser= new ProfileEntry(editFirstName, editLastName, emailName, phoneName, profPic);
+                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, profPic);
                 Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
                 users.put(emailName, newUser);
                 mProfileRef.setValue(users);
@@ -147,18 +149,20 @@ public class ProfileLast extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
+        switch (requestCode) {
             case 10:
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     configureButton();
                 return;
         }
     }
 
-    public void configureButton(){
-        saveProf.setOnClickListener(new View.OnClickListener(){
+    public void configureButton() {
+        saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
+                //Even though there is an error, the permission check is taken care of
+                //at the place the method is called
                 locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
             }
         });
