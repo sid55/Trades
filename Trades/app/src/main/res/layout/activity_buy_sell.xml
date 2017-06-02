@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,30 +9,40 @@
     tools:layout_editor_absoluteX="0dp">
 
     <Button
+        android:id="@+id/myprofilebutton"
+        android:layout_width="509dp"
+        android:layout_height="150dp"
+        android:text="My Profile"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/buybutton"
+        android:layout_alignStart="@+id/buybutton"
+        android:layout_marginTop="20dp" />
+
+
+    <Button
         android:id="@+id/buybutton"
-        android:layout_width="395dp"
-        android:layout_height="288dp"
+        android:layout_width="509dp"
+        android:layout_height="150dp"
         android:text="Buy"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/sellbutton"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp" />
+
+        android:layout_below = "@+id/myprofilebutton"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/sellbutton"
+        android:layout_alignStart="@+id/sellbutton"
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:id="@+id/sellbutton"
-        android:layout_width="395dp"
-        android:layout_height="289dp"
+        android:layout_width="509dp"
+        android:layout_height="150dp"
         android:text="Sell"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginBottom="8dp" />
+        android:layout_below="@+id/buybutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+ />
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>
