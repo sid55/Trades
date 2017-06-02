@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileLast extends AppCompatActivity {
 
+    public final Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
     private static final int SELECTED_PICTURE = 100;
 
     //View Refs
@@ -73,8 +74,7 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText)findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-                ProfileEntry newUser= new ProfileEntry(editFirstName, editLastName, emailName, phoneName, profPic);
-                Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
+                ProfileEntry newUser= new ProfileEntry(editFirstName, editLastName, emailName, phoneName);
                 users.put(emailName, newUser);
                 mProfileRef.setValue(users);
             }
