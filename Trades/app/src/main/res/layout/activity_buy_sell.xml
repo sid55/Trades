@@ -4,26 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cmps115.trades.BuySell">
+    tools:context="com.cmps115.trades.BuySell"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="184dp"
-        android:layout_height="93dp"
+        android:id="@+id/buybutton"
+        android:layout_width="395dp"
+        android:layout_height="288dp"
         android:text="Buy"
-        app:layout_constraintTop_toTopOf="@+id/button4"
-        app:layout_constraintRight_toLeftOf="@+id/button4"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/sellbutton"
+        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="0dp" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="184dp"
-        android:layout_height="93dp"
-        android:text="Sell"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038"
-        app:layout_constraintLeft_toRightOf="@+id/button3" />
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/sellbutton"
+        android:layout_width="395dp"
+        android:layout_height="289dp"
+        android:text="Sell"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginBottom="8dp" />
+
 </android.support.constraint.ConstraintLayout>

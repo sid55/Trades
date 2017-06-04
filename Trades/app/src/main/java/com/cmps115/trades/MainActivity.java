@@ -9,7 +9,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseProfRef;
 
     public static final String tag = "On Create!";
     @Override
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i(tag, "onCreate");
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseProfRef = mFirebaseDatabase.getReference().child("profiles");
     }
 
 }
