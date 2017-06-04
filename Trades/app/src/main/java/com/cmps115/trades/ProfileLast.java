@@ -116,7 +116,7 @@ public class ProfileLast extends AppCompatActivity {
             public void onClick(View v) {
 
                 //Even though there is an error, the permission check is taken care of
-                //at the place the method is called
+                //in the above code. Thus, there will never be an error here.
                 locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
                 double latitude = location.getLatitude();
 
