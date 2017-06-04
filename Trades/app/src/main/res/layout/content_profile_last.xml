@@ -42,7 +42,7 @@
         android:layout_below="@+id/imageSubmit"
         android:layout_alignLeft="@+id/imageSubmit"
         android:layout_alignStart="@+id/imageSubmit"
-        android:layout_toStartOf="@+id/image"
+        android:layout_toLeftOf="@+id/image"
         android:layout_alignRight="@+id/imageSubmit"
         android:layout_alignEnd="@+id/imageSubmit" />
 
