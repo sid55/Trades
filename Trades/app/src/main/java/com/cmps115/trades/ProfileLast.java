@@ -51,6 +51,8 @@ public class ProfileLast extends AppCompatActivity {
     private String emailName;
     private String phoneName;
     private Bitmap profPic;
+    private double latitude;
+    private double longitude;
 
     //Database Refs
     private FirebaseDatabase mDatabase;
@@ -116,6 +118,7 @@ public class ProfileLast extends AppCompatActivity {
                 //Even though there is an error, the permission check is taken care of
                 //at the place the method is called
                 locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+                double latitude = location.getLatitude();
 
                 startActivity(new Intent(ProfileLast.this, BuySell.class));
 
@@ -131,7 +134,7 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, profPic);
+                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, profPic, latitude, longitude);
                 Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
                 users.put(emailName, newUser);
                 mProfileRef.setValue(users);

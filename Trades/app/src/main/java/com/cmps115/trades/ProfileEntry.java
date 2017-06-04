@@ -9,6 +9,9 @@ public class ProfileEntry {
     //Change to int
     private String phoneNo;
     private Bitmap profPic;
+    //Locational tracking
+    private double longi;
+    private double lat;
 
     //Need to make data struct for an array of skills
     //private String skills;
@@ -19,12 +22,14 @@ public class ProfileEntry {
 
     }
 
-    public ProfileEntry(String fName, String lName, String email, String phoneNo, Bitmap profPic){
+    public ProfileEntry(String fName, String lName, String email, String phoneNo, double longi, double lat){
         this.fName= fName;
         this.lName= lName;
         this.email= email;
         this.phoneNo= phoneNo;
-        this.profPic= profPic;
+        //this.profPic= profPic;
+        this.longi= longi;
+        this.lat= lat;
     }
 
     //Mutators
@@ -44,6 +49,11 @@ public class ProfileEntry {
         this.phoneNo= numb;
     }
 
+    public void setLocation(double longitude, double latitude){
+        this.longi= longitude;
+        this.lat= latitude;
+    }
+
     //Accessors
     public String getfName(){
         return fName;
@@ -60,6 +70,10 @@ public class ProfileEntry {
     public String getPhone(){
         return phoneNo;
     }
+
+    public double getLongi(){return longi; }
+
+    public double getLat(){return lat; }
 
     //use Databaseref.push to generate salted keys
 }
