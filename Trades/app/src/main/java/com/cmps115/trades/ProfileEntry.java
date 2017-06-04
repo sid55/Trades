@@ -22,7 +22,6 @@ public class ProfileEntry {
 
     }
 
-
     public ProfileEntry(String fName, String lName, String email, String phoneNo){
         this.fName= fName;
         this.lName= lName;
