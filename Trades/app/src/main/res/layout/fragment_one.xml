@@ -14,16 +14,6 @@
         android:layout_centerHorizontal="true" />
 
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_above="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="56dp"
-        android:indeterminate="false" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
