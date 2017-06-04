@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
