@@ -30,40 +30,31 @@ import java.util.jar.Attributes;
 
 public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
 
-    private LinearLayout profile;
-    private ImageView picture;
 
-    private TextView username;
-    private TextView user_email;
-    private SignInButton signInBtn;
-    private Button logout;
+    TextView statusTextView;
+    Button signOutBtn;
+    SignInButton signInBtn;
 
     private static final String TAG = "Why is it crashing?";
-    private GoogleApiClient apiClient;
+    GoogleApiClient apiClient;
     private static final int CODE = 9001;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         apiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
 
-        picture = (ImageView) findViewById(R.id.prof_pic);
-        profile = (LinearLayout) findViewById(R.id.profile);
-        profile.setVisibility(View.GONE);
-
-
-        signInBtn = (SignInButton) findViewById(R.id.signin);
-        username = (TextView) findViewById(R.id.nameuser);
-        user_email = (TextView) findViewById(R.id.emailuser);
-        logout = (Button) findViewById(R.id.logoutBtn);
-
+        statusTextView = (TextView) findViewById(R.id.status_textview);
+        signInBtn = (SignInButton) findViewById(R.id.sign_in_button);
         signInBtn.setOnClickListener(this);
-        logout.setOnClickListener(this);
 
+        signOutBtn = (Button) findViewById(R.id.signOutButton);
+        signOutBtn.setOnClickListener(this);
 
     }
 
@@ -71,57 +62,28 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.signin:
+            case R.id.sign_in_button:
                 signingIn();
                 break;
-            case R.id.logoutBtn:
+            case R.id.signOutButton:
                 signingOut();
                 break;
         }
 
 
     }
-
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
-
-    }
-
-
-    //
-    private void result(GoogleSignInResult r){
-
-        if(r.isSuccess() == true){
-
-            GoogleSignInAccount account = r.getSignInAccount();
-
-            String name = account.getDisplayName();
-            username.setText(name);
-
-
-            String email = account.getEmail();
-            user_email.setText(email);
-
-            update(true);
-
-        }
-        else{
-
-            update(false);
-
-        }
+    public void onConnectionFailed(ConnectionResult connectionResult){
 
 
     }
-
 
     private void signingOut(){
 
         Auth.GoogleSignInApi.signOut(apiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                update(false);
+                statusTextView.setText("Signed out!");
             }
         });
 
@@ -134,26 +96,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
     }
 
-
-    //
-    private void update(boolean isLogin){
-
-        if(isLogin){
-
-            profile.setVisibility(View.VISIBLE);
-            signInBtn.setVisibility(View.GONE);
-
-        }
-        else{
-
-            profile.setVisibility(View.GONE);
-            signInBtn.setVisibility(View.VISIBLE);
-
-        }
-
-
-    }
-
     @Override
     protected void onActivityResult(int reqCode, int resCode, Intent d) {
         super.onActivityResult(reqCode, resCode, d);
@@ -161,9 +103,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         if(reqCode == CODE){
 
             GoogleSignInResult r = Auth.GoogleSignInApi.getSignInResultFromIntent(d);
-            result(r);
-
+            handleSignInResult(r);
         }
     }
+
+
+
+    private void handleSignInResult(GoogleSignInResult result){
+        if(result.isSuccess()){
+
+            GoogleSignInAccount acct = result.getSignInAccount();
+            statusTextView.setText("Hello, " + acct.getDisplayName());
+        }
+
+    }
+
 
 }
