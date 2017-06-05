@@ -21,6 +21,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -108,8 +109,16 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
+                //convert image to encoded string and store into database
+                imageView.buildDrawingCache();
+                Bitmap bmap = imageView.getDrawingCache();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteFormat = stream.toByteArray();
+                String encodedImage = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+
                 mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude);
+                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude, encodedImage);
                 users.put(emailName, newUser);
                 mNewProfileRef.setValue(users);
             }
