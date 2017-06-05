@@ -52,7 +52,7 @@ public class ProfileLast extends AppCompatActivity {
     private double longitude;
 
     //String values
-    private String editFirstName;
+    private String editFirstName = null;
     private String editLastName;
     private String emailName;
     private String phoneName;
@@ -110,7 +110,7 @@ public class ProfileLast extends AppCompatActivity {
                 String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(phoneName);
-                if(matcher.matches()){
+                if(matcher.matches() && (editFirstName.length() != 0) && (editLastName.length() != 0)){
 
                     gps = new TrackGPS(ProfileLast.this);
 
@@ -135,6 +135,12 @@ public class ProfileLast extends AppCompatActivity {
                     ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude, encodedImage);
                     users.put(emailName, newUser);
                     mNewProfileRef.setValue(users);
+                }
+                else if(editFirstName.length() == 0){
+                    Toast.makeText(getApplicationContext(), "First Name Required", Toast.LENGTH_SHORT).show();
+                }
+                else if(editLastName.length() == 0){
+                    Toast.makeText(getApplicationContext(), "Last Name Required", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Invalid Phone Number", Toast.LENGTH_SHORT).show();
