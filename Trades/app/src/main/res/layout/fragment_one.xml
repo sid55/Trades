@@ -8,7 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="FRAGMENT 1"
+        android:text="Fragment 3"
+        android:textColor="#99999"
         android:id="@+id/textView6"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -52,5 +53,20 @@
         android:layout_alignTop="@+id/imageView2"
         android:layout_toRightOf="@+id/textView6"
         android:layout_toEndOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:text="Welcome to Trades! \n The skills marketplace for you!\n\nStick with us shortly before moving on to the app!"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textColor="#104e8b"
+        android:textStyle="bold"
+
+        />
 
 </RelativeLayout>
