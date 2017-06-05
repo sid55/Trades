@@ -26,13 +26,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileLast extends AppCompatActivity {
 
-    public final Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
     private static final int SELECTED_PICTURE = 100;
 
     //View Refs
@@ -42,9 +42,9 @@ public class ProfileLast extends AppCompatActivity {
     private Uri imageUri;
 
     //for getting location
-    private TextView textView;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
+    private TrackGPS gps;
+    private double latitude;
+    private double longitude;
 
     //String values
     private String editFirstName;
@@ -52,12 +52,11 @@ public class ProfileLast extends AppCompatActivity {
     private String emailName;
     private String phoneName;
     private Bitmap profPic;
-    private double latitude = 3.2;
-    private double longitude = 5.4;
 
     //Database Refs
     private FirebaseDatabase mDatabase;
     private DatabaseReference mProfileRef;
+    private DatabaseReference mListingRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,59 +68,36 @@ public class ProfileLast extends AppCompatActivity {
         button = (Button) findViewById(R.id.imageSubmit);
         saveProf = (Button) findViewById(R.id.submit);
 
-        //For location API
-        textView = (TextView) findViewById(R.id.textView2);
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
-        };
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.INTERNET
-                }, 10);
-                return;
-            }
-        } else {
-            configureButton();
-        }
 
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
         mProfileRef = mDatabase.getReference().child("profiles");
+        mListingRef = mDatabase.getReference().child("listings");
 
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //Even though there is an error, the permission check is taken care of
-                //in the above code. Thus, there will never be an error here.
+                gps = new TrackGPS(ProfileLast.this);
 
-  //              locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
-  //              double latitude = location.getLatitude();
 
-                startActivity(new Intent(ProfileLast.this, BuySell.class));
+                if(gps.canGetLocation()){
+
+
+                    longitude = gps.getLongitude();
+                    latitude = gps .getLatitude();
+
+                    //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+
+                    gps.showSettingsAlert();
+                }
+
+
+
+                //startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
@@ -135,7 +111,8 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-                ProfileEntry newUser= new ProfileEntry(editFirstName, editLastName, emailName, phoneName);
+                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, latitude, longitude);
+                Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
                 users.put(emailName, newUser);
                 mProfileRef.setValue(users);
             }
@@ -151,25 +128,9 @@ public class ProfileLast extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 10:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    configureButton();
-                return;
-        }
-    }
-
-    public void configureButton() {
-        saveProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Even though there is an error, the permission check is taken care of
-                //at the place the method is called
-
-    //            locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
-            }
-        });
+    protected void onDestroy(){
+        super.onDestroy();
+        gps.stopUsingGPS();
     }
 
     public void openGallery(){
@@ -181,11 +142,11 @@ public class ProfileLast extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try{
-        if(resultCode == RESULT_OK && requestCode == SELECTED_PICTURE){
-            imageUri = data.getData();
-            imageView.setImageURI(imageUri);
-            profPic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-        }}
+            if(resultCode == RESULT_OK && requestCode == SELECTED_PICTURE){
+                imageUri = data.getData();
+                imageView.setImageURI(imageUri);
+                profPic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+            }}
         catch (IOException ie) {
             //fill error check for bitmap conversion
         }
