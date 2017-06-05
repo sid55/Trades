@@ -84,6 +84,23 @@ public class ProfileLast extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
+=======
+                if(gps.canGetLocation()){
+
+                    longitude = gps.getLongitude();
+                    latitude = gps.getLatitude();
+
+                    //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+
+                    gps.showSettingsAlert();
+                }
+
+                //startActivity(new Intent(ProfileLast.this, BuySell.class));
+>>>>>>> parent of 4eb1da9... Gradle change is good!
 
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
