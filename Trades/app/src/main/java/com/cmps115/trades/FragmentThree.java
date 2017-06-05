@@ -23,7 +23,7 @@ public class FragmentThree extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getActivity(), Login.class));
+                startActivity(new Intent(getActivity(), UserProfile.class));
 
             }
         });

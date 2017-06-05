@@ -1,5 +1,7 @@
 package com.cmps115.trades;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +33,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ProfileLast extends AppCompatActivity {
+public class UserProfile extends AppCompatActivity {
 
     private static final int SELECTED_PICTURE = 100;
 
@@ -61,7 +63,7 @@ public class ProfileLast extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_profile_last);
+        setContentView(R.layout.activity_user_profile);
 
         //View Refs
         imageView = (ImageView) findViewById(R.id.image);
@@ -78,7 +80,7 @@ public class ProfileLast extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                gps = new TrackGPS(ProfileLast.this);
+                gps = new TrackGPS(UserProfile.this);
 
 
                 if(gps.canGetLocation()){
@@ -97,7 +99,7 @@ public class ProfileLast extends AppCompatActivity {
 
 
 
-                startActivity(new Intent(ProfileLast.this, BuySell.class));
+                startActivity(new Intent(UserProfile.this, BuySell.class));
 
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();

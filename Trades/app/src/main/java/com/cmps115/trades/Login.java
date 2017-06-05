@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private TextView username;
     private TextView user_email;
     private SignInButton signInBtn;
-    private Button logout;
+
 
     private static final String TAG = "Why is it crashing?";
     private GoogleApiClient apiClient;
@@ -58,10 +58,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         signInBtn = (SignInButton) findViewById(R.id.signin);
         username = (TextView) findViewById(R.id.nameuser);
         user_email = (TextView) findViewById(R.id.emailuser);
-        logout = (Button) findViewById(R.id.logoutBtn);
+
 
         signInBtn.setOnClickListener(this);
-        logout.setOnClickListener(this);
+
 
 
     }
@@ -74,8 +74,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 signingIn();
                 break;
             case R.id.logoutBtn:
-                signingOut();
+                switchpages();
                 break;
+
         }
 
 
@@ -102,7 +103,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             String email = account.getEmail();
             user_email.setText(email);
 
-            //startActivity(new Intent(Login.this, ProfileLast.class));
+            switchpages();
 
 
         }
@@ -111,6 +112,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
     }
 
+
+    private void switchpages(){
+        Intent i = new Intent(Login.this, UserProfile.class);
+        startActivity(i);
+
+    }
 
     private void signingOut(){
 
