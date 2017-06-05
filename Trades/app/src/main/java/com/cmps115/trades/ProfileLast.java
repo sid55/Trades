@@ -11,6 +11,7 @@ import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -23,6 +24,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,7 +84,6 @@ public class ProfileLast extends AppCompatActivity {
 
 
 
-
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
 
@@ -95,12 +96,21 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
+                //convert image to encoded string and store into database
+                imageView.buildDrawingCache();
+                Bitmap bmap = imageView.getDrawingCache();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteFormat = stream.toByteArray();
+                String encodedImage = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
 
 
+                //Following regex formula taken from
+                //http://howtodoinjava.com/regex/java-regex-validate-and-format-north-american-phone-numbers/
                 String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(phoneName);
-                if(matcher.matches()) {
+                if(matcher.matches()){
 
                     gps = new TrackGPS(ProfileLast.this);
 
@@ -118,16 +128,19 @@ public class ProfileLast extends AppCompatActivity {
                         gps.showSettingsAlert();
                     }
 
+
                     startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                     mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-                    ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude);
+                    ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude, encodedImage);
                     users.put(emailName, newUser);
                     mNewProfileRef.setValue(users);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Invalid Phone Number", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
 
