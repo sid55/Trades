@@ -18,7 +18,6 @@ public class SellPage extends AppCompatActivity {
 
     //Database Refs
     private FirebaseDatabase mDatabase;
-    private DatabaseReference mProfileRef;
     private DatabaseReference mListingRef;
 
     private String writeNewListing(String name, String desc){
@@ -41,7 +40,6 @@ public class SellPage extends AppCompatActivity {
 
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
-        mProfileRef = mDatabase.getReference().child("profiles");
         mListingRef = mDatabase.getReference().child("listings");
 
         vSubmit.setOnClickListener(new View.OnClickListener(){
