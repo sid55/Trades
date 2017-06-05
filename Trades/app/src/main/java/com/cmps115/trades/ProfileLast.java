@@ -26,6 +26,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,6 +59,7 @@ public class ProfileLast extends AppCompatActivity {
     private String editLastName;
     private String editName;
     private String emailName;
+    private String emailSub;
     private String phoneName;
     private Bitmap profPic;
 
@@ -66,20 +68,45 @@ public class ProfileLast extends AppCompatActivity {
     private DatabaseReference mProfileRef;
     private DatabaseReference mNewProfileRef;
 
+    String nameHere = "No name passed!";
+    String emailHere = "No email passed!";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_profile_last);
 
-        //View Refs
-        imageView = (ImageView) findViewById(R.id.image);
-        button = (Button) findViewById(R.id.imageSubmit);
-        saveProf = (Button) findViewById(R.id.submit);
-
+        Log.i("Why", "Why you no work.");
 
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
         mProfileRef = mDatabase.getReference().child("profiles");
+
+        final EditText editFirst = (EditText) findViewById(R.id.firstName);
+        final EditText editLast = (EditText) findViewById(R.id.lastName);
+        final EditText email = (EditText) findViewById(R.id.email);
+
+
+        Bundle ex = getIntent().getExtras();
+
+
+        nameHere = ex.getString("Name-passed");
+        emailHere = ex.getString("Email-passed");
+
+        emailSub = emailHere.substring(0, emailHere.length() - 4);
+        Log.i("Emailformat" , emailSub + "");
+
+        Log.i("PrintPrint", nameHere + "");
+        Log.i("PrintPrint", emailHere + "");
+
+        editFirst.setText(nameHere);
+        email.setText(emailSub);
+
+
+        //View Refs
+        imageView = (ImageView) findViewById(R.id.image);
+        button = (Button) findViewById(R.id.imageSubmit);
+        saveProf = (Button) findViewById(R.id.submit);
 
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,16 +114,18 @@ public class ProfileLast extends AppCompatActivity {
 
 
 
-                EditText editFirst = (EditText) findViewById(R.id.firstName);
+                //EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
 
-                EditText editLast = (EditText) findViewById(R.id.lastName);
+                //EditText editLast = (EditText) findViewById(R.id.lastName);
                 editLastName = editLast.getText().toString();
 
                 editName = editFirstName+" " + editLastName;
 
                 EditText email = (EditText) findViewById(R.id.email);
+
                 emailName = email.getText().toString();
+
 
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
@@ -137,8 +166,10 @@ public class ProfileLast extends AppCompatActivity {
                     startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                     mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
+
                     currUser = new ProfileEntry(editName, emailName, phoneName, longitude, latitude, encodedImage);
                     users.put(emailName, currUser);
+
                     mNewProfileRef.setValue(users);
                 }
                 else if(editFirstName.length() == 0){

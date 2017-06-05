@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "745899543201-u7filqu1d1r1r04ogeqf10ajs0p0h6au.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cmps115.trades",
+            "certificate_hash": "f611facfa78f4cbd019d0d6e77dda00c17164363"
+          }
+        },
+        {
           "client_id": "745899543201-tnqkd352i7duf00j45qpssljuji52fkk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

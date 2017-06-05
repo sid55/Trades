@@ -47,6 +47,7 @@ public class BuyPage extends AppCompatActivity {
                         adapter.insert(post, 0);
                     }
                 }
+
             }
 
             @Override
