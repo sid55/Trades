@@ -83,9 +83,8 @@ public class ProfileLast extends AppCompatActivity {
 
                 if(gps.canGetLocation()){
 
-
                     longitude = gps.getLongitude();
-                    latitude = gps .getLatitude();
+                    latitude = gps.getLatitude();
 
                     //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
                 }
@@ -94,8 +93,6 @@ public class ProfileLast extends AppCompatActivity {
 
                     gps.showSettingsAlert();
                 }
-
-
 
                 startActivity(new Intent(ProfileLast.this, BuySell.class));
 
@@ -112,7 +109,7 @@ public class ProfileLast extends AppCompatActivity {
                 phoneName = phone.getText().toString();
 
                 mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName);
+                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude);
                 users.put(emailName, newUser);
                 mNewProfileRef.setValue(users);
             }
