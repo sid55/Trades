@@ -124,8 +124,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     //
     private void signingIn(){
         Intent i = Auth.GoogleSignInApi.getSignInIntent(apiClient);
-        startActivityForResult(i, CODE); //must override with onActivityResult
-
+        startActivityForResult(i, CODE);
 
     }
 

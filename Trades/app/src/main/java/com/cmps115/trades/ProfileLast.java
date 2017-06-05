@@ -81,6 +81,9 @@ public class ProfileLast extends AppCompatActivity {
         Log.i("Print", ex.getString("Name-passed") + "");
         Log.i("Print", ex.getString("Email-passed") + "");
 
+        nameHere = ex.getString("Name-passed");
+        emailHere = ex.getString("Email-passed");
+
 
         //View Refs
         imageView = (ImageView) findViewById(R.id.image);
