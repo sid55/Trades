@@ -1,14 +1,17 @@
 package com.cmps115.trades;
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.core.deps.guava.util.concurrent.Service;
+import android.support.test.filters.MediumTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.ServiceTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.junit.Rule;
@@ -28,11 +31,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -42,6 +47,9 @@ import static org.hamcrest.core.IsInstanceOf.any;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.*;
 
+import android.content.Intent;
+
+
 import static android.support.test.espresso.Espresso.onView;
 
 /**
@@ -50,32 +58,11 @@ import static android.support.test.espresso.Espresso.onView;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class TestCase0 {
-
-    private static final String STRING_TO_BE_TYPED_FIRST = "Sid";
-    private static final String STRING_TO_BE_TYPED_LAST = "Gilela";
+public class ButtonsBuySell {
 
 
-    @Rule
-    public ActivityTestRule<ProfileLast> rule = new ActivityTestRule<ProfileLast>(ProfileLast.class);
+    @MediumTest
+    public void testButtonActivityA () {
 
-    @Rule
-    public final ServiceTestRule mServiceRule = new ServiceTestRule();
-
-    @Test
-    public void fillInFirstNameData() throws Exception {
-        Intent serviceIntent =
-                new Intent(InstrumentationRegistry.getTargetContext(),
-                        TrackGPS.class);
-
-
-        // Bind the service and grab a reference to the binder.
-        IBinder binder = mServiceRule.bindService(serviceIntent);
-
-        String expectedString = "Sid";
-        onView(withId(R.id.firstName)).perform(typeText(STRING_TO_BE_TYPED_FIRST), closeSoftKeyboard()).check(matches(withText(expectedString)));
-
-        String expectedLastName = "Gilela";
-        onView(withId(R.id.lastName)).perform(typeText(STRING_TO_BE_TYPED_LAST), closeSoftKeyboard()).check(matches(withText(expectedLastName)));
     }
 }

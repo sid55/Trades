@@ -50,14 +50,7 @@ import static android.support.test.espresso.Espresso.onView;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class TestCase0 {
-
-    private static final String STRING_TO_BE_TYPED_FIRST = "Sid";
-    private static final String STRING_TO_BE_TYPED_LAST = "Gilela";
-
-
-    @Rule
-    public ActivityTestRule<ProfileLast> rule = new ActivityTestRule<ProfileLast>(ProfileLast.class);
+public class TrackGPSRunning {
 
     @Rule
     public final ServiceTestRule mServiceRule = new ServiceTestRule();
@@ -71,11 +64,5 @@ public class TestCase0 {
 
         // Bind the service and grab a reference to the binder.
         IBinder binder = mServiceRule.bindService(serviceIntent);
-
-        String expectedString = "Sid";
-        onView(withId(R.id.firstName)).perform(typeText(STRING_TO_BE_TYPED_FIRST), closeSoftKeyboard()).check(matches(withText(expectedString)));
-
-        String expectedLastName = "Gilela";
-        onView(withId(R.id.lastName)).perform(typeText(STRING_TO_BE_TYPED_LAST), closeSoftKeyboard()).check(matches(withText(expectedLastName)));
     }
 }
