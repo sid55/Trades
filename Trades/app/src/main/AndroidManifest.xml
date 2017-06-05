@@ -42,16 +42,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Login" >
 
-        <activity android:name=".UserProfile"/>
-        <activity android:name=".BuyPage" />
-        <activity android:name=".SellPage" />
-        <activity android:name=".BuySell">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
     </application>

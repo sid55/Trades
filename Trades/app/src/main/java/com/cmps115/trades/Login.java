@@ -114,7 +114,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
 
     private void switchpages(){
-        Intent i = new Intent(Login.this, UserProfile.class);
+        Intent i = new Intent(Login.this, Login.class);
         startActivity(i);
 
     }

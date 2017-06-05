@@ -1,7 +1,5 @@
 package com.cmps115.trades;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +21,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,8 +32,9 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class UserProfile extends AppCompatActivity {
+public class ProfileLast extends AppCompatActivity {
 
+    public final Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
     private static final int SELECTED_PICTURE = 100;
 
     //View Refs
@@ -58,12 +58,12 @@ public class UserProfile extends AppCompatActivity {
     //Database Refs
     private FirebaseDatabase mDatabase;
     private DatabaseReference mProfileRef;
-    private DatabaseReference mListingRef;
+    private DatabaseReference mNewProfileRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_profile_last);
 
         //View Refs
         imageView = (ImageView) findViewById(R.id.image);
@@ -74,20 +74,18 @@ public class UserProfile extends AppCompatActivity {
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
         mProfileRef = mDatabase.getReference().child("profiles");
-        mListingRef = mDatabase.getReference().child("listings");
 
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                gps = new TrackGPS(UserProfile.this);
+                gps = new TrackGPS(ProfileLast.this);
 
 
                 if(gps.canGetLocation()){
 
-
                     longitude = gps.getLongitude();
-                    latitude = gps .getLatitude();
+                    latitude = gps.getLatitude();
 
                     //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
                 }
@@ -97,9 +95,7 @@ public class UserProfile extends AppCompatActivity {
                     gps.showSettingsAlert();
                 }
 
-
-
-                startActivity(new Intent(UserProfile.this, BuySell.class));
+                startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
@@ -113,10 +109,18 @@ public class UserProfile extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, latitude, longitude);
-                Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
+                //convert image to encoded string and store into database
+                imageView.buildDrawingCache();
+                Bitmap bmap = imageView.getDrawingCache();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteFormat = stream.toByteArray();
+                String encodedImage = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+
+                mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
+                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude, encodedImage);
                 users.put(emailName, newUser);
-                mProfileRef.setValue(users);
+                mNewProfileRef.setValue(users);
             }
         });
 

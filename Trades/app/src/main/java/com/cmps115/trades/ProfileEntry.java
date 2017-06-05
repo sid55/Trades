@@ -13,6 +13,7 @@ public class ProfileEntry {
     private double longi;
     private double lat;
 
+    String myImage;
     //Need to make data struct for an array of skills
     //private String skills;
     //private Image profPic;
@@ -22,13 +23,14 @@ public class ProfileEntry {
 
     }
 
-    public ProfileEntry(String fName, String lName, String email, String phoneNo, double latNum, double longNum){
+    public ProfileEntry(String fName, String lName, String email, String phoneNo, double longi, double lat, String myImage){
         this.fName= fName;
         this.lName= lName;
         this.email= email;
         this.phoneNo= phoneNo;
-        this.longi = longNum;
-        this.lat = latNum;
+        this.longi= longi;
+        this.lat= lat;
+        this.myImage = myImage;
     }
 
     //Mutators
@@ -64,6 +66,10 @@ public class ProfileEntry {
 
     public String getEmail(){
         return email;
+    }
+
+    public String getMyImage(){
+        return myImage;
     }
 
     public String getPhone(){
