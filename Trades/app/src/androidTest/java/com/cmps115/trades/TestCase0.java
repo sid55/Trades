@@ -54,7 +54,8 @@ public class TestCase0 {
 
     private static final String STRING_TO_BE_TYPED_FIRST = "Sid";
     private static final String STRING_TO_BE_TYPED_LAST = "Gilela";
-
+    private static final String STRING_TO_BE_TYPED_EMAIL = "myemail";
+    private static final String STRING_TO_BE_TYPED_PHONE = "5101234567";
 
     @Rule
     public ActivityTestRule<ProfileLast> rule = new ActivityTestRule<ProfileLast>(ProfileLast.class);
@@ -77,5 +78,13 @@ public class TestCase0 {
 
         String expectedLastName = "Gilela";
         onView(withId(R.id.lastName)).perform(typeText(STRING_TO_BE_TYPED_LAST), closeSoftKeyboard()).check(matches(withText(expectedLastName)));
+
+        String expectedemail = "myemail";
+        onView(withId(R.id.email)).perform(typeText(STRING_TO_BE_TYPED_EMAIL), closeSoftKeyboard()).check(matches(withText(expectedemail)));
+
+        String expectedphone = "5101234567";
+        onView(withId(R.id.phone)).perform(typeText(STRING_TO_BE_TYPED_PHONE), closeSoftKeyboard()).check(matches(withText(expectedphone)));
+
+
     }
 }
