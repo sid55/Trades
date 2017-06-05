@@ -44,15 +44,9 @@
         <activity android:name=".BuyPage"></activity>
         <activity android:name=".SellPage" />
         <activity android:name=".BuySell"></activity>
+        <activity android:name=".Login" />
         <activity android:name=".ProfileLast" />
-        <activity
-            android:name=".MyProfile"
-            android:label="@string/title_activity_my_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".EditMyProfile"
-            android:label="@string/title_activity_edit_my_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>
