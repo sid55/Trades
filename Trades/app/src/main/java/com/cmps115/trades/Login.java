@@ -51,9 +51,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         apiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
 
-        picture = (ImageView) findViewById(R.id.prof_pic);
         profile = (LinearLayout) findViewById(R.id.profile);
-        profile.setVisibility(View.GONE);
+
 
 
         signInBtn = (SignInButton) findViewById(R.id.signin);
@@ -103,14 +102,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             String email = account.getEmail();
             user_email.setText(email);
 
-            update(true);
+            //startActivity(new Intent(Login.this, ProfileLast.class));
+
 
         }
-        else{
 
-            update(false);
-
-        }
 
 
     }
@@ -121,7 +117,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         Auth.GoogleSignInApi.signOut(apiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                update(false);
+
             }
         });
 
@@ -132,27 +128,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         Intent i = Auth.GoogleSignInApi.getSignInIntent(apiClient);
         startActivityForResult(i, CODE); //must override with onActivityResult
 
-    }
-
-
-    //
-    private void update(boolean isLogin){
-
-        if(isLogin){
-
-            profile.setVisibility(View.VISIBLE);
-            signInBtn.setVisibility(View.GONE);
-
-        }
-        else{
-
-            profile.setVisibility(View.GONE);
-            signInBtn.setVisibility(View.VISIBLE);
-
-        }
-
 
     }
+
+
 
     @Override
     protected void onActivityResult(int reqCode, int resCode, Intent d) {
