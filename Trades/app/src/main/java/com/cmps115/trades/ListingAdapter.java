@@ -20,7 +20,7 @@ public class ListingAdapter extends ArrayAdapter<ListingEntry> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ListingEntry listing = getItem(position);
+        final ListingEntry listing = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_listing, parent, false);
         }
@@ -30,12 +30,29 @@ public class ListingAdapter extends ArrayAdapter<ListingEntry> {
         TextView description = (TextView) convertView.findViewById(R.id.Desc);
 
         skill.setText(listing.getName());
-
         username.setText(listing.getLister().getEmail());
-
         description.setText(listing.getDesc());
 
+        skill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listing.getLister().incRating();
+            }
+        });
 
+        username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listing.getLister().incRating();
+            }
+        });
+
+        description.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listing.getLister().incRating();
+            }
+        });
         return convertView;
     }
 }

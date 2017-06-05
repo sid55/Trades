@@ -6,12 +6,13 @@ import android.graphics.Bitmap;
 public class ProfileEntry {
     private String name;
     private String email;
-    //Change to int
+    private int rating= 0;
     private String phoneNo;
     private Bitmap profPic;
     //Locational tracking
     private double longi;
     private double lat;
+
 
     String myImage;
     //Need to make data struct for an array of skills
@@ -59,6 +60,8 @@ public class ProfileEntry {
         this.lat= latitude;
     }
 
+    public void incRating(){this.rating=+1;}
+
     //Accessors
     public String getname(){
         return name;
@@ -79,6 +82,8 @@ public class ProfileEntry {
     public double getLongi(){return longi; }
 
     public double getLat(){return lat; }
+
+    public String getRating(){return Integer.toString(rating);}
 
     //use Databaseref.push to generate salted keys
 }
