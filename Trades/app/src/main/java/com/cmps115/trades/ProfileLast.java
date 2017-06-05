@@ -56,6 +56,7 @@ public class ProfileLast extends AppCompatActivity {
     private String editFirstName;
     private String editLastName;
     private String emailName;
+    private String emailSub;
     private String phoneName;
     private Bitmap profPic;
 
@@ -86,15 +87,17 @@ public class ProfileLast extends AppCompatActivity {
         Bundle ex = getIntent().getExtras();
 
 
-
         nameHere = ex.getString("Name-passed");
         emailHere = ex.getString("Email-passed");
+
+        emailSub = emailHere.substring(0, emailHere.length() - 4);
+        Log.i("Emailformat" , emailSub + "");
 
         Log.i("PrintPrint", nameHere + "");
         Log.i("PrintPrint", emailHere + "");
 
         editFirst.setText(nameHere);
-        email.setText(emailHere);
+        email.setText(emailSub);
 
 
         //View Refs
@@ -116,6 +119,7 @@ public class ProfileLast extends AppCompatActivity {
 
                 //EditText email = (EditText) findViewById(R.id.email);
                 emailName = email.getText().toString();
+
 
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
@@ -156,7 +160,7 @@ public class ProfileLast extends AppCompatActivity {
                     startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                     mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-                    ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude, encodedImage);
+                    ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailSub, phoneName, longitude, latitude, encodedImage);
                     users.put(emailName, newUser);
                     mNewProfileRef.setValue(users);
                 }
