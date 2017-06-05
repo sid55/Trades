@@ -1,15 +1,19 @@
 package com.cmps115.trades;
 
+import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.core.deps.guava.collect.Iterables;
 import android.support.test.espresso.core.deps.guava.util.concurrent.Service;
 import android.support.test.filters.MediumTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.ServiceTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import android.support.test.runner.lifecycle.Stage;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -60,9 +64,22 @@ import static android.support.test.espresso.Espresso.onView;
 @RunWith(AndroidJUnit4.class)
 public class ButtonsBuySell {
 
+    private BuySell activity;
+    private Button myButton;
 
-    @MediumTest
-    public void testButtonActivityA () {
+    @Before
+    public void setUp() throws Exception{
+        activity = new BuySell();
+        activity.onCreate(null);
+        myButton = (Button) activity.findViewById(R.id.sellbutton);
+    }
+
+    @Test
+    public void testButtonActivity () {
+        myButton.performClick();
+        //Intent intent = new Intent();
+        //intent.setClassName("com.cmps115.trades");
+        assertNotNull(activity);
 
     }
 }

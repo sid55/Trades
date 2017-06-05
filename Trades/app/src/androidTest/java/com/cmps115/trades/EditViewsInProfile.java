@@ -52,7 +52,7 @@ import static android.support.test.espresso.Espresso.onView;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class TestCase0 {
+public class EditViewsInProfile {
 
     private static final String STRING_TO_BE_TYPED_FIRST = "Sid";
     private static final String STRING_TO_BE_TYPED_LAST = "Gilela";
@@ -62,18 +62,8 @@ public class TestCase0 {
     @Rule
     public ActivityTestRule<ProfileLast> rule = new ActivityTestRule<ProfileLast>(ProfileLast.class);
 
-    @Rule
-    public final ServiceTestRule mServiceRule = new ServiceTestRule();
-
     @Test
     public void fillInFirstNameData() throws Exception {
-        Intent serviceIntent =
-                new Intent(InstrumentationRegistry.getTargetContext(),
-                        TrackGPS.class);
-
-
-        // Bind the service and grab a reference to the binder.
-        IBinder binder = mServiceRule.bindService(serviceIntent);
 
         String expectedString = "Sid";
         onView(withId(R.id.firstName)).perform(typeText(STRING_TO_BE_TYPED_FIRST), closeSoftKeyboard()).check(matches(withText(expectedString)));
@@ -86,11 +76,5 @@ public class TestCase0 {
 
         String expectedphone = "5101234567";
         onView(withId(R.id.phone)).perform(typeText(STRING_TO_BE_TYPED_PHONE), closeSoftKeyboard()).check(matches(withText(expectedphone)));
-
-        Button button;
-        button = (Button) findViewById(R.id.submit);
-        button.performClick();
-
-
     }
 }
