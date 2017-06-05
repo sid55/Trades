@@ -97,7 +97,7 @@ public class ProfileLast extends AppCompatActivity {
 
 
 
-                //startActivity(new Intent(ProfileLast.this, BuySell.class));
+                startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();

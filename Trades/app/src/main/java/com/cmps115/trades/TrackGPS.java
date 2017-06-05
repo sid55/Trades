@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 /**
  * Created by ANQ on 8/8/2016.
+ *
+ * Credit to: http://clover.studio/2016/08/09/getting-current-location-in-android-using-location-manager/
  */
 
 public class TrackGPS extends Service implements LocationListener {
