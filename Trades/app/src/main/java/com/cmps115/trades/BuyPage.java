@@ -35,7 +35,7 @@ public class BuyPage extends AppCompatActivity {
 
         ListView listView= (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
-        
+
         mListingRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
