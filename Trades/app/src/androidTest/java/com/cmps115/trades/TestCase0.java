@@ -9,6 +9,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.ServiceTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.junit.Rule;
@@ -33,6 +34,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -84,6 +86,10 @@ public class TestCase0 {
 
         String expectedphone = "5101234567";
         onView(withId(R.id.phone)).perform(typeText(STRING_TO_BE_TYPED_PHONE), closeSoftKeyboard()).check(matches(withText(expectedphone)));
+
+        Button button;
+        button = (Button) findViewById(R.id.submit);
+        button.performClick();
 
 
     }
