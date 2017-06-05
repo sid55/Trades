@@ -56,8 +56,6 @@ public class ProfileLast extends AppCompatActivity {
     private String phoneName;
     private Bitmap profPic;
 
-    String nameLast;
-    String emailLast;
 
     //Database Refs
     private FirebaseDatabase mDatabase;
