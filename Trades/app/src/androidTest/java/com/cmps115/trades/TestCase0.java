@@ -87,9 +87,7 @@ public class TestCase0 {
         String expectedphone = "5101234567";
         onView(withId(R.id.phone)).perform(typeText(STRING_TO_BE_TYPED_PHONE), closeSoftKeyboard()).check(matches(withText(expectedphone)));
 
-        Button button;
-        button = (Button) findViewById(R.id.submit);
-        button.performClick();
+        onView(withId(R.id.submit)).perform(click());
 
 
     }
