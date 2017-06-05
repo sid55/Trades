@@ -61,7 +61,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
-        android:text="Welcome to Trades! \n The skills marketplace for you!\n\nThe following are quick tips on how to use the app"
+        android:text="Welcome to Trades! \n The skills marketplace for you!\n\nStick with us shortly before moving on to the app!"
         android:textAlignment="center"
         android:textSize="40sp"
         android:textColor="#104e8b"

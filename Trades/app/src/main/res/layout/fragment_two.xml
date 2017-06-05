@@ -63,7 +63,7 @@
         android:layout_marginTop="49dp"
         android:text="In this app you will be able to either Sell your skills or Buy skills from other users just like you!"
         android:textAlignment="center"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:textColor="#104e8b"
         android:textStyle="bold"
 

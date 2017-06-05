@@ -70,9 +70,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
-        android:text="All you need is to allow gps to help optimize your trades and supply your email and phone number"
+        android:text="All you need is to allow gps to help optimize your trades and supply your email and phone number before interacting with the marketplace!"
         android:textAlignment="center"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:textColor="#104e8b"
         android:textStyle="bold"
 
