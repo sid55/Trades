@@ -76,5 +76,6 @@ public class EditViewsInProfile {
 
         String expectedphone = "5101234567";
         onView(withId(R.id.phone)).perform(typeText(STRING_TO_BE_TYPED_PHONE), closeSoftKeyboard()).check(matches(withText(expectedphone)));
+
     }
 }
