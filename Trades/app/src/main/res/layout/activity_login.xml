@@ -10,29 +10,6 @@
     android:weightSum="1">
 
 
-    <LinearLayout
-        android:id="@+id/profile"
-        android:layout_width="362dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        android:layout_weight="0.26">
-
-        <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:weightSum="1">
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signin"
         android:layout_width="300dp"

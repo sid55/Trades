@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.*;
 
+
 import android.*;
 import android.Manifest;
 import android.content.Intent;
@@ -40,6 +41,8 @@ public class ProfileLast extends AppCompatActivity {
     private Button saveProf;
     private Uri imageUri;
 
+
+
     //for getting location
     private TextView textView;
     private LocationManager locationManager;
@@ -56,6 +59,20 @@ public class ProfileLast extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mProfileRef;
     private DatabaseReference mListingRef;
+
+    public class ImportAPIData extends Login{
+        Login data = new Login();
+        if((data.name != null) && (data.email != null)){
+            String nameHere = data.name;
+            String email = data.email;
+            emailName = email;
+            editFirstName = name;
+        }
+
+
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

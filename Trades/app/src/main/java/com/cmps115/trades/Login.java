@@ -54,17 +54,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         apiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions).build();
 
-        profile = (LinearLayout) findViewById(R.id.profile);
-
-
 
         signInBtn = (SignInButton) findViewById(R.id.signin);
-        username = (TextView) findViewById(R.id.nameuser);
-        user_email = (TextView) findViewById(R.id.emailuser);
-        logout = (Button) findViewById(R.id.logoutBtn);
+
 
         signInBtn.setOnClickListener(this);
-        logout.setOnClickListener(this);
 
 
     }
@@ -98,14 +92,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
             name = account.getDisplayName();
             email = account.getEmail();
-            user_email.setText(email);
-
-            //startActivity(new Intent(Login.this, ProfileLast.class));
-
+            switchToProfile();
 
         }
 
 
+
+    }
+
+
+    public void switchToProfile(){
+        Intent i = new Intent(Login.this, ProfileLast.class);
+        startActivity(i);
 
     }
 
