@@ -33,7 +33,7 @@ public class ListingAdapter extends ArrayAdapter<ListingEntry> {
 
         skill.setText(listing.getName());
 
-        username.setText(listing.getLister().getfName()+" "+listing.getLister().getlName());
+        username.setText(listing.getLister().getEmail());
 
         description.setText(listing.getDesc());
 

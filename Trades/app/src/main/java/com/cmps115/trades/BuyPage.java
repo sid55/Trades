@@ -40,8 +40,6 @@ public class BuyPage extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ListingEntry post= dataSnapshot.getValue(ListingEntry.class);
-     //           ProfileEntry newUse= post.getLister();
-     //           ListingEntry lister= new ListingEntry(post.getName(), newUse, post.getDesc());
                 adapter.insert(post, 0);
             }
 
