@@ -19,11 +19,11 @@ public class BuyPage extends AppCompatActivity {
         ListView listView= (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        ProfileEntry newUse= new ProfileEntry("first", "last", "email", "phone", 123, 123);
+        ProfileEntry newUse= new ProfileEntry("first", "last", "email", "phone", 123, 123, "fkjdsl");
 
         ListingEntry lister= new ListingEntry("skill2", newUse, "desc");
         adapter.add(lister);
-        ProfileEntry newUser= new ProfileEntry("f", "l", "email", "phone", 123, 123);
+        ProfileEntry newUser= new ProfileEntry("f", "l", "email", "phone", 123, 123, "dsfdsi");
 
         ListingEntry listerr= new ListingEntry("skill1", newUser, "desc");
         adapter.insert(listerr, 0);
