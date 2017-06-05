@@ -75,14 +75,23 @@ public class ProfileLast extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_profile_last);
 
+        final EditText editFirst = (EditText) findViewById(R.id.firstName);
+        final EditText editLast = (EditText) findViewById(R.id.lastName);
+        final EditText email = (EditText) findViewById(R.id.email);
+
 
         Bundle ex = getIntent().getExtras();
 
-        Log.i("Print", ex.getString("Name-passed") + "");
-        Log.i("Print", ex.getString("Email-passed") + "");
+
 
         nameHere = ex.getString("Name-passed");
         emailHere = ex.getString("Email-passed");
+
+        Log.i("PrintPrint", nameHere + "");
+        Log.i("PrintPrint", emailHere + "");
+
+        editFirst.setText(nameHere);
+        email.setText(emailHere);
 
 
         //View Refs
@@ -142,13 +151,14 @@ public class ProfileLast extends AppCompatActivity {
 
                 startActivity(new Intent(ProfileLast.this, BuySell.class));
 
-                EditText editFirst = (EditText) findViewById(R.id.firstName);
+                //EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
 
-                EditText editLast = (EditText) findViewById(R.id.lastName);
+                //EditText editLast = (EditText) findViewById(R.id.lastName);
                 editLastName = editLast.getText().toString();
 
-                EditText email = (EditText) findViewById(R.id.email);
+                //EditText email = (EditText) findViewById(R.id.email);
+
                 emailName = email.getText().toString();
 
                 EditText phone = (EditText) findViewById(R.id.phone);
