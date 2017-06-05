@@ -10,38 +10,41 @@
 
     <Button
         android:id="@+id/myprofilebutton"
-        android:layout_width="509dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:text="My Profile"
 
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@+id/buybutton"
-        android:layout_alignStart="@+id/buybutton"
-        android:layout_marginTop="20dp" />
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bluebutton"/>
 
 
     <Button
         android:id="@+id/buybutton"
-        android:layout_width="509dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:text="Buy"
-
         android:layout_below = "@+id/myprofilebutton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@+id/sellbutton"
-        android:layout_alignStart="@+id/sellbutton"
-        android:layout_marginTop="20dp"/>
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bluebutton"
+
+/>
 
     <Button
         android:id="@+id/sellbutton"
-        android:layout_width="509dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:text="Sell"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/buybutton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:background="@drawable/bluebutton"
  />
 
 
