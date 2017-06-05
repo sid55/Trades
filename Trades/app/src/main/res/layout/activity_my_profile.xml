@@ -30,20 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/last"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="32sp"
-        android:inputType="textPersonName"
-        android:hint="Last"
-        android:layout_alignBaseline="@+id/first"
-        android:layout_alignBottom="@+id/first"
-        android:layout_toRightOf="@+id/first"
-        android:layout_toEndOf="@+id/first"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp" />
+
 
     <TextView
         android:id="@+id/email"
@@ -70,5 +57,17 @@
         android:textSize="28sp"
         android:inputType="phone"
         android:hint="Phone #" />
+
+    <Button
+        android:id="@+id/editprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="Edit Profile"
+        android:layout_below="@+id/phonenumber"
+        android:layout_marginTop="40dp"
+        />
 
 </RelativeLayout>

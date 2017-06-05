@@ -1,47 +1,35 @@
 package com.cmps115.trades;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.jar.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import android.*;
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.graphics.Bitmap;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ProfileLast extends AppCompatActivity {
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class EditMyProfile extends AppCompatActivity {
 
     public final Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
     private static final int SELECTED_PICTURE = 100;
-    public static ProfileEntry currUser;
 
     //View Refs
     private ImageView imageView;
@@ -59,7 +47,6 @@ public class ProfileLast extends AppCompatActivity {
     private String editLastName;
     private String editName;
     private String emailName;
-    private String emailSub;
     private String phoneName;
     private Bitmap profPic;
 
@@ -68,45 +55,20 @@ public class ProfileLast extends AppCompatActivity {
     private DatabaseReference mProfileRef;
     private DatabaseReference mNewProfileRef;
 
-    String nameHere = "No name passed!";
-    String emailHere = "No email passed!";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_profile_last);
-
-        Log.i("Why", "Why you no work.");
-
-        //Database References
-        mDatabase = FirebaseDatabase.getInstance();
-        mProfileRef = mDatabase.getReference().child("profiles");
-
-        final EditText editFirst = (EditText) findViewById(R.id.firstName);
-        final EditText editLast = (EditText) findViewById(R.id.lastName);
-        final EditText email = (EditText) findViewById(R.id.email);
-
-
-        Bundle ex = getIntent().getExtras();
-
-
-        nameHere = ex.getString("Name-passed");
-        emailHere = ex.getString("Email-passed");
-
-        emailSub = emailHere.substring(0, emailHere.length() - 4);
-        Log.i("Emailformat" , emailSub + "");
-
-        Log.i("PrintPrint", nameHere + "");
-        Log.i("PrintPrint", emailHere + "");
-
-        editFirst.setText(nameHere);
-        email.setText(emailSub);
-
+        setContentView(R.layout.activity_edit_my_profile);
 
         //View Refs
         imageView = (ImageView) findViewById(R.id.image);
         button = (Button) findViewById(R.id.imageSubmit);
         saveProf = (Button) findViewById(R.id.submit);
+
+
+        //Database References
+        mDatabase = FirebaseDatabase.getInstance();
+        mProfileRef = mDatabase.getReference().child("profiles");
 
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,18 +76,16 @@ public class ProfileLast extends AppCompatActivity {
 
 
 
-                //EditText editFirst = (EditText) findViewById(R.id.firstName);
+                EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
 
-                //EditText editLast = (EditText) findViewById(R.id.lastName);
+                EditText editLast = (EditText) findViewById(R.id.lastName);
                 editLastName = editLast.getText().toString();
 
-                editName = editFirstName+" " + editLastName;
+                editName = editFirstName+" "+editLastName;
 
                 EditText email = (EditText) findViewById(R.id.email);
-
                 emailName = email.getText().toString();
-
 
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
@@ -146,30 +106,11 @@ public class ProfileLast extends AppCompatActivity {
                 Matcher matcher = pattern.matcher(phoneName);
                 if(matcher.matches() && (editFirstName.length() != 0) && (editLastName.length() != 0)){
 
-                    gps = new TrackGPS(ProfileLast.this);
-
-
-                    if(gps.canGetLocation()){
-
-                        longitude = gps.getLongitude();
-                        latitude = gps.getLatitude();
-
-                        //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-
-                        gps.showSettingsAlert();
-                    }
-
-
-                    startActivity(new Intent(ProfileLast.this, BuySell.class));
+                    startActivity(new Intent(EditMyProfile.this, MyProfile.class));
 
                     mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-
-                    currUser = new ProfileEntry(editName, emailName, phoneName, longitude, latitude, encodedImage);
-                    users.put(emailName, currUser);
-
+                    ProfileEntry newUser = new ProfileEntry(editName, emailName, phoneName, longitude, latitude, encodedImage);
+                    users.put(emailName, newUser);
                     mNewProfileRef.setValue(users);
                 }
                 else if(editFirstName.length() == 0){
@@ -219,4 +160,5 @@ public class ProfileLast extends AppCompatActivity {
             //fill error check for bitmap conversion
         }
     }
+
 }

@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="FRAGMENT 2"
+        android:textColor="#FFFFFF"
         android:id="@+id/textView7"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -52,5 +53,20 @@
         android:scaleType="fitCenter"
         android:layout_alignTop="@+id/imageView2"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:text="In this app you will be able to either Sell your skills or Buy skills from other users just like you!"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        android:textColor="#104e8b"
+        android:textStyle="bold"
+
+        />
 
 </RelativeLayout>

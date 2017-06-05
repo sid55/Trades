@@ -18,14 +18,11 @@ public class SellPage extends AppCompatActivity {
 
     //Database Refs
     private FirebaseDatabase mDatabase;
-    private DatabaseReference mProfileRef;
     private DatabaseReference mListingRef;
-
-    ProfileEntry newUse= new ProfileEntry("first", "last", "email", "phone", 123, 123);
 
     private String writeNewListing(String name, String desc){
         String listId;
-        ListingEntry listing = new ListingEntry(name,newUse,desc);
+        ListingEntry listing = new ListingEntry(name,ProfileLast.currUser,desc);
         mListingRef.push().setValue(listing);
         return listId = mListingRef.getKey();
     }
@@ -43,7 +40,6 @@ public class SellPage extends AppCompatActivity {
 
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
-        mProfileRef = mDatabase.getReference().child("profiles");
         mListingRef = mDatabase.getReference().child("listings");
 
         vSubmit.setOnClickListener(new View.OnClickListener(){

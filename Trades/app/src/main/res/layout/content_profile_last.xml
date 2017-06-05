@@ -42,7 +42,7 @@
         android:layout_marginTop="49dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="First" />
+        android:hint="First" />
 
     <EditText
         android:id="@+id/lastName"
@@ -53,7 +53,7 @@
         android:layout_toRightOf="@+id/imageSubmit"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Last" />
+        android:hint="Last" />
 
     <EditText
         android:id="@+id/email"
@@ -61,7 +61,7 @@
         android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Email"
+        android:hint="Email"
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/firstName"
         android:layout_alignStart="@+id/firstName" />
@@ -77,7 +77,7 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="phone"
-        android:text="Phone #"/>
+        android:hint="Phone #"/>
 
     <Button
         android:id="@+id/submit"
