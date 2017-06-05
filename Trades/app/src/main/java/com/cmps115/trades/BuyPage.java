@@ -21,11 +21,11 @@ public class BuyPage extends AppCompatActivity {
 
         ProfileEntry newUse= new ProfileEntry("first", "last", "email", "phone");
 
-        ListingEntry lister= new ListingEntry("skill", newUse, "desc");
+        ListingEntry lister= new ListingEntry("skill2", newUse, "desc");
         adapter.add(lister);
         ProfileEntry newUser= new ProfileEntry("f", "l", "email", "phone");
 
-        ListingEntry listerr= new ListingEntry("skill", newUser, "desc");
+        ListingEntry listerr= new ListingEntry("skill1", newUser, "desc");
         adapter.insert(listerr, 0);
     }
 }

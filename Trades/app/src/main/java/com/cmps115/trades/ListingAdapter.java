@@ -27,8 +27,14 @@ public class ListingAdapter extends ArrayAdapter<ListingEntry> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_listing, parent, false);
         }
 
-        TextView name = (TextView) convertView.findViewById(R.id.Name);
-        name.setText(listing.getLister().getfName()+" "+listing.getLister().getlName());
+        TextView skill = (TextView) convertView.findViewById(R.id.Name);
+        TextView username = (TextView) convertView.findViewById(R.id.User);
+        TextView description = (TextView) convertView.findViewById(R.id.Desc);
+
+        skill.setText(listing.getName()+" \n");
+        username.setText(listing.getLister().getfName()+" "+listing.getLister().getlName());
+        description.setText(listing.getDesc());
+
 
         return convertView;
     }
