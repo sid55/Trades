@@ -107,8 +107,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
     public void switchToProfile(){
         Intent i = new Intent(Login.this, ProfileLast.class);
-        i.putExtra("Name", getName());
-        i.putExtra("Email", getEmail());
+        i.putExtra("Name-passed", getName());
+        i.putExtra("Email-passed", getEmail());
         startActivity(i);
 
     }

@@ -75,13 +75,11 @@ public class ProfileLast extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_profile_last);
 
-        Login data = new Login();
-        nameHere = data.getName();
-        emailHere = data.getEmail();
 
+        Bundle ex = getIntent().getExtras();
 
-        Log.i("Print", nameLast + "");
-        Log.i("Print", emailLast + "");
+        Log.i("Print", ex.getString("Name-passed") + "");
+        Log.i("Print", ex.getString("Email-passed") + "");
 
 
         //View Refs
