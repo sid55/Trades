@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Fragment 3"
-        android:textColor="#99999"
+        android:textColor="#FFFFFF"
         android:id="@+id/textView6"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -63,7 +63,7 @@
         android:layout_marginTop="49dp"
         android:text="Welcome to Trades! \n The skills marketplace for you!\n\nStick with us shortly before moving on to the app!"
         android:textAlignment="center"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:textColor="#104e8b"
         android:textStyle="bold"
 
