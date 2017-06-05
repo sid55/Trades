@@ -105,7 +105,8 @@ public class ProfileLast extends AppCompatActivity {
                 String encodedImage = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
 
 
-
+                //Following regex formula taken from
+                //http://howtodoinjava.com/regex/java-regex-validate-and-format-north-american-phone-numbers/
                 String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(phoneName);
