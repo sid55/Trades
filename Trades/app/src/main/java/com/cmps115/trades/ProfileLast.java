@@ -96,7 +96,7 @@ public class ProfileLast extends AppCompatActivity {
                     gps.showSettingsAlert();
                 }
 
-                //startActivity(new Intent(ProfileLast.this, BuySell.class));
+                startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
