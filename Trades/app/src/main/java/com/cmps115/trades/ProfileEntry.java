@@ -3,8 +3,7 @@ package com.cmps115.trades;
 import android.graphics.Bitmap;
 
 public class ProfileEntry {
-    private String fName;
-    private String lName;
+    private String name;
     private String email;
     //Change to int
     private String phoneNo;
@@ -23,18 +22,16 @@ public class ProfileEntry {
 
     }
 
-    public ProfileEntry(String fName, String lName, String email, String phoneNo, double longi, double lat){
-        this.fName= fName;
-        this.lName= lName;
+    public ProfileEntry(String name, String email, String phoneNo, double longi, double lat){
+        this.name= name;
         this.email= email;
         this.phoneNo= phoneNo;
         this.longi= longi;
         this.lat= lat;
     }
 
-    public ProfileEntry(String fName, String lName, String email, String phoneNo, double longi, double lat, String myImage){
-        this.fName= fName;
-        this.lName= lName;
+    public ProfileEntry(String name, String email, String phoneNo, double longi, double lat, String myImage){
+        this.name= name;
         this.email= email;
         this.phoneNo= phoneNo;
         this.longi= longi;
@@ -43,13 +40,10 @@ public class ProfileEntry {
     }
 
     //Mutators
-    public void setfName(String word){
-        this.fName= word;
+    public void setname(String word){
+        this.name= word;
     }
 
-    public void setlName(String word){
-        this.lName= word;
-    }
 
     public void setEmail(String word){
         this.email= word;
@@ -65,12 +59,8 @@ public class ProfileEntry {
     }
 
     //Accessors
-    public String getfName(){
-        return fName;
-    }
-
-    public String getlName(){
-        return lName;
+    public String getname(){
+        return name;
     }
 
     public String getEmail(){

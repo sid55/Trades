@@ -45,6 +45,7 @@ public class EditMyProfile extends AppCompatActivity {
     //String values
     private String editFirstName = null;
     private String editLastName;
+    private String editName;
     private String emailName;
     private String phoneName;
     private Bitmap profPic;
@@ -81,6 +82,8 @@ public class EditMyProfile extends AppCompatActivity {
                 EditText editLast = (EditText) findViewById(R.id.lastName);
                 editLastName = editLast.getText().toString();
 
+                editName = editFirstName+" "+editLastName;
+
                 EditText email = (EditText) findViewById(R.id.email);
                 emailName = email.getText().toString();
 
@@ -106,7 +109,7 @@ public class EditMyProfile extends AppCompatActivity {
                     startActivity(new Intent(EditMyProfile.this, MyProfile.class));
 
                     mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-                    ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude, encodedImage);
+                    ProfileEntry newUser = new ProfileEntry(editName, emailName, phoneName, longitude, latitude, encodedImage);
                     users.put(emailName, newUser);
                     mNewProfileRef.setValue(users);
                 }

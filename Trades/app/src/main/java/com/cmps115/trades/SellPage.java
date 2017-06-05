@@ -21,7 +21,7 @@ public class SellPage extends AppCompatActivity {
     private DatabaseReference mProfileRef;
     private DatabaseReference mListingRef;
 
-    ProfileEntry newUse= new ProfileEntry("first", "last", "email", "phone", 123, 123);
+    ProfileEntry newUse= new ProfileEntry("name", "email", "phone", 123, 123);
 
     private String writeNewListing(String name, String desc){
         String listId;
