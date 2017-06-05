@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.*;
 import android.Manifest;
@@ -85,7 +87,7 @@ public class ProfileLast extends AppCompatActivity {
 
 
                     longitude = gps.getLongitude();
-                    latitude = gps .getLatitude();
+                    latitude = gps.getLatitude();
 
                     //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
                 }
@@ -95,9 +97,6 @@ public class ProfileLast extends AppCompatActivity {
                     gps.showSettingsAlert();
                 }
 
-
-
-                startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
@@ -111,10 +110,23 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-                mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName);
-                users.put(emailName, newUser);
-                mNewProfileRef.setValue(users);
+
+
+                String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(phoneName);
+                if(matcher.matches()) {
+                    startActivity(new Intent(ProfileLast.this, BuySell.class));
+
+                    mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
+                    ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName);
+                    users.put(emailName, newUser);
+                    mNewProfileRef.setValue(users);
+                }
+                else{
+
+
+                }
             }
         });
 
