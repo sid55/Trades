@@ -13,31 +13,9 @@ import android.widget.ProgressBar;
 
 public class FragmentTwo extends Fragment {
 
-    private static final int PROGRESS = 0x1;
-    private ProgressBar progressBar;
-    private int mProgressStatus = 0;
-    private Handler mHandler = new Handler();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_two, container, false);
-
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
-        progressBar.setMax(100);
-
-        // Start lengthy operation in a background thread
-        new Thread(new Runnable() {
-            public void run() {
-                mProgressStatus = 67;
-
-                // Update the progress bar
-                mHandler.post(new Runnable() {
-                    public void run() {
-                        progressBar.setProgress(mProgressStatus);
-                    }
-                });
-
-            }
-        }).start();
 
         return view;
     }
