@@ -38,9 +38,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private SignInButton signInBtn;
     private Button logout;
 
-    String name;
-    String email;
-
     private static final String TAG = "Why is it crashing?";
     private GoogleApiClient apiClient;
     private static final int CODE = 9001;
@@ -76,7 +73,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             case R.id.signin:
                 signingIn();
                 break;
-
+            case R.id.logoutBtn:
+                signingOut();
+                break;
         }
 
 
@@ -96,8 +95,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
             GoogleSignInAccount account = r.getSignInAccount();
 
-            name = account.getDisplayName();
-            email = account.getEmail();
+            String name = account.getDisplayName();
+            username.setText(name);
+
+
+            String email = account.getEmail();
             user_email.setText(email);
 
             //startActivity(new Intent(Login.this, ProfileLast.class));
@@ -110,6 +112,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     }
 
 
+    private void signingOut(){
+
+        Auth.GoogleSignInApi.signOut(apiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+
+            }
+        });
+
+    }
+
     //
     private void signingIn(){
         Intent i = Auth.GoogleSignInApi.getSignInIntent(apiClient);
@@ -117,6 +130,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
 
     }
+
 
 
     @Override
