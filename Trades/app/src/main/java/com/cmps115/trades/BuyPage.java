@@ -40,7 +40,7 @@ public class BuyPage extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ListingEntry post= dataSnapshot.getValue(ListingEntry.class);
-                //Display if around uc santa cruz
+                //Display if (~7mi)around uc santa cruz
                 ProfileEntry lister= post.getLister();
                 if(lister.getLat()>36.8914 && lister.getLat()<37.0914) {
                     if(lister.getLongi()>(-122.1609) && lister.getLongi()<(-121.9609)) {
