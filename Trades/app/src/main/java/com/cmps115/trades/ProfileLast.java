@@ -33,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileLast extends AppCompatActivity {
 
+    public final Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
     private static final int SELECTED_PICTURE = 100;
 
     //View Refs
@@ -56,7 +57,7 @@ public class ProfileLast extends AppCompatActivity {
     //Database Refs
     private FirebaseDatabase mDatabase;
     private DatabaseReference mProfileRef;
-    private DatabaseReference mListingRef;
+    private DatabaseReference mNewProfileRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,6 @@ public class ProfileLast extends AppCompatActivity {
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
         mProfileRef = mDatabase.getReference().child("profiles");
-        mListingRef = mDatabase.getReference().child("listings");
 
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,10 +111,10 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, latitude, longitude);
-                Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
+                mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
+                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName);
                 users.put(emailName, newUser);
-                mProfileRef.setValue(users);
+                mNewProfileRef.setValue(users);
             }
         });
 

@@ -22,13 +22,13 @@ public class ProfileEntry {
 
     }
 
-    public ProfileEntry(String fName, String lName, String email, String phoneNo, double latNum, double longNum){
+    public ProfileEntry(String fName, String lName, String email, String phoneNo){
         this.fName= fName;
         this.lName= lName;
         this.email= email;
         this.phoneNo= phoneNo;
-        this.longi = longNum;
-        this.lat = latNum;
+    //    this.longi = longNum;
+    //    this.lat = latNum;
     }
 
     //Mutators
