@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="First"
+        android:hint="First"
         android:layout_marginLeft="64dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="51dp"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Last"
+        android:hint="Last"
         android:layout_alignBaseline="@+id/editText"
         android:layout_alignBottom="@+id/editText"
         android:layout_toRightOf="@+id/editText"
@@ -50,7 +50,7 @@
         android:layout_marginTop="50dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="Email"
+        android:hint="Email"
         android:layout_below="@+id/editText"
         android:layout_alignLeft="@+id/editText"
         android:layout_alignStart="@+id/editText" />
@@ -65,6 +65,6 @@
         android:layout_marginTop="49dp"
         android:ems="10"
         android:inputType="phone"
-        android:text="Phone #" />
+        android:hint="Phone #" />
 
 </RelativeLayout>

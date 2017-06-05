@@ -31,8 +31,10 @@ public class ListingAdapter extends ArrayAdapter<ListingEntry> {
         TextView username = (TextView) convertView.findViewById(R.id.User);
         TextView description = (TextView) convertView.findViewById(R.id.Desc);
 
-        skill.setText(listing.getName()+" \n");
+        skill.setText(listing.getName());
+
         username.setText(listing.getLister().getfName()+" "+listing.getLister().getlName());
+
         description.setText(listing.getDesc());
 
 

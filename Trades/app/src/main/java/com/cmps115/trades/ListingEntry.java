@@ -18,7 +18,7 @@ public class ListingEntry {
     public ListingEntry(String name, ProfileEntry lister, String desc){
         this.name= name;
         this.lister= lister;
-        this.description= desc;
+        this.description=  desc;
     }
 
     //Mutators
