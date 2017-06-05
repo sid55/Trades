@@ -9,6 +9,7 @@ import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -95,7 +96,7 @@ public class ProfileLast extends AppCompatActivity {
                     gps.showSettingsAlert();
                 }
 
-                startActivity(new Intent(ProfileLast.this, BuySell.class));
+                //startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
