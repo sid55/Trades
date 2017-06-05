@@ -82,10 +82,6 @@ public class ProfileLast extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
-<<<<<<< HEAD
-=======
                 if(gps.canGetLocation()){
 
                     longitude = gps.getLongitude();
@@ -100,8 +96,6 @@ public class ProfileLast extends AppCompatActivity {
                 }
 
                 //startActivity(new Intent(ProfileLast.this, BuySell.class));
->>>>>>> parent of 4eb1da9... Gradle change is good!
-
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
 
