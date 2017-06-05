@@ -5,13 +5,15 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Start Trading"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="FRAGMENT 3"
-        android:id="@+id/textView7"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignStart="@+id/button2"
+        android:layout_marginTop="124dp" />
 
 
     <ImageView
@@ -53,17 +55,12 @@
         android:layout_alignTop="@+id/imageView2"
         android:layout_centerHorizontal="true" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/signin"
-        android:layout_width="300dp"
-        android:onClick="onClick"
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginBottom="49dp"
-        android:layout_above="@+id/imageView"
-        android:layout_centerHorizontal="true">
-
-    </com.google.android.gms.common.SignInButton>
+        android:text="Get Started!"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
