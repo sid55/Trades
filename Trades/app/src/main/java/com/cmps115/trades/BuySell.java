@@ -35,12 +35,26 @@ public class BuySell extends AppCompatActivity {
 
 
 
+
+    public Button myprofilebutton;
+    public void initmyprofile(){
+        myprofilebutton = (Button) findViewById(R.id.myprofilebutton);
+        myprofilebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent showmyprofile = new Intent(BuySell.this, MyProfile.class);
+                startActivity(showmyprofile);
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_sell);
         initbuy();
         initSell();
+        initmyprofile();
     }
 
 

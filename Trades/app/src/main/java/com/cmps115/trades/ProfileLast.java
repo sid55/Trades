@@ -4,12 +4,15 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -23,17 +26,20 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileLast extends AppCompatActivity {
 
+    public final Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
     private static final int SELECTED_PICTURE = 100;
 
     //View Refs
@@ -45,9 +51,9 @@ public class ProfileLast extends AppCompatActivity {
 
 
     //for getting location
-    private TextView textView;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
+    private TrackGPS gps;
+    private double latitude;
+    private double longitude;
 
     //String values
     private String editFirstName;
@@ -60,7 +66,7 @@ public class ProfileLast extends AppCompatActivity {
     //Database Refs
     private FirebaseDatabase mDatabase;
     private DatabaseReference mProfileRef;
-    private DatabaseReference mListingRef;
+    private DatabaseReference mNewProfileRef;
 
 
     String nameHere = "No name passed!";
@@ -97,57 +103,16 @@ public class ProfileLast extends AppCompatActivity {
         button = (Button) findViewById(R.id.imageSubmit);
         saveProf = (Button) findViewById(R.id.submit);
 
-        //For location API
-        textView = (TextView) findViewById(R.id.textView2);
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                textView.append("\n" + location.getLatitude() + " " + location.getLongitude());
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
-        };
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.INTERNET
-                }, 10);
-                return;
-            }
-        } else {
-            configureButton();
-        }
 
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
         mProfileRef = mDatabase.getReference().child("profiles");
-        mListingRef = mDatabase.getReference().child("listings");
 
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //Even though there is an error, the permission check is taken care of
-                //at the place the method is called
-                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
 
-                startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                 //EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
@@ -162,10 +127,51 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, profPic);
-                Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
-                users.put(emailName, newUser);
-                mProfileRef.setValue(users);
+                //convert image to encoded string and store into database
+                imageView.buildDrawingCache();
+                Bitmap bmap = imageView.getDrawingCache();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteFormat = stream.toByteArray();
+                String encodedImage = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+
+
+                //Following regex formula taken from
+                //http://howtodoinjava.com/regex/java-regex-validate-and-format-north-american-phone-numbers/
+                String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(phoneName);
+                if(matcher.matches()){
+
+                    gps = new TrackGPS(ProfileLast.this);
+
+
+                    if(gps.canGetLocation()){
+
+                        longitude = gps.getLongitude();
+                        latitude = gps.getLatitude();
+
+                        //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+
+                        gps.showSettingsAlert();
+                    }
+
+
+                    startActivity(new Intent(ProfileLast.this, BuySell.class));
+
+                    mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
+                    ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude, encodedImage);
+                    users.put(emailName, newUser);
+                    mNewProfileRef.setValue(users);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Invalid Phone Number", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
@@ -178,24 +184,9 @@ public class ProfileLast extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case 10:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    configureButton();
-                return;
-        }
-    }
-
-    public void configureButton() {
-        saveProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Even though there is an error, the permission check is taken care of
-                //at the place the method is called
-                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
-            }
-        });
+    protected void onDestroy(){
+        super.onDestroy();
+        gps.stopUsingGPS();
     }
 
     public void openGallery(){
@@ -207,11 +198,11 @@ public class ProfileLast extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try{
-        if(resultCode == RESULT_OK && requestCode == SELECTED_PICTURE){
-            imageUri = data.getData();
-            imageView.setImageURI(imageUri);
-            profPic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-        }}
+            if(resultCode == RESULT_OK && requestCode == SELECTED_PICTURE){
+                imageUri = data.getData();
+                imageView.setImageURI(imageUri);
+                profPic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+            }}
         catch (IOException ie) {
             //fill error check for bitmap conversion
         }
