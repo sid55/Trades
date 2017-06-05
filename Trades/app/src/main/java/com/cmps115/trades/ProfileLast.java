@@ -72,6 +72,12 @@ public class ProfileLast extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_profile_last);
 
+        Log.i("Why", "Why you no work.");
+
+        //Database References
+        mDatabase = FirebaseDatabase.getInstance();
+        mProfileRef = mDatabase.getReference().child("profiles");
+
         final EditText editFirst = (EditText) findViewById(R.id.firstName);
         final EditText editLast = (EditText) findViewById(R.id.lastName);
         final EditText email = (EditText) findViewById(R.id.email);
@@ -95,11 +101,6 @@ public class ProfileLast extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.image);
         button = (Button) findViewById(R.id.imageSubmit);
         saveProf = (Button) findViewById(R.id.submit);
-
-
-        //Database References
-        mDatabase = FirebaseDatabase.getInstance();
-        mProfileRef = mDatabase.getReference().child("profiles");
 
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
