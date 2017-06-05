@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.*;
 import android.Manifest;
@@ -82,6 +80,9 @@ public class ProfileLast extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                gps = new TrackGPS(ProfileLast.this);
+
+
                 if(gps.canGetLocation()){
 
                     longitude = gps.getLongitude();
@@ -95,7 +96,8 @@ public class ProfileLast extends AppCompatActivity {
                     gps.showSettingsAlert();
                 }
 
-                //startActivity(new Intent(ProfileLast.this, BuySell.class));
+                startActivity(new Intent(ProfileLast.this, BuySell.class));
+
                 EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
 
@@ -108,7 +110,6 @@ public class ProfileLast extends AppCompatActivity {
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
-
                 //convert image to encoded string and store into database
                 imageView.buildDrawingCache();
                 Bitmap bmap = imageView.getDrawingCache();
@@ -117,42 +118,10 @@ public class ProfileLast extends AppCompatActivity {
                 byte[] byteFormat = stream.toByteArray();
                 String encodedImage = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
 
-
-
-
-                String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(phoneName);
-                if(matcher.matches()) {
-
-                    gps = new TrackGPS(ProfileLast.this);
-
-
-                    if(gps.canGetLocation()){
-
-                        longitude = gps.getLongitude();
-                        latitude = gps.getLatitude();
-
-                        //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-
-                        gps.showSettingsAlert();
-                    }
-
-                    startActivity(new Intent(ProfileLast.this, BuySell.class));
-
-                    mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-                    ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName,
-                                                            longitude, latitude, encodedImage);
-                    users.put(emailName, newUser);
-                    mNewProfileRef.setValue(users);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Invalid Phone Number", Toast.LENGTH_SHORT).show();
-                }
-
+                mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
+                ProfileEntry newUser = new ProfileEntry(editFirstName, editLastName, emailName, phoneName, longitude, latitude, encodedImage);
+                users.put(emailName, newUser);
+                mNewProfileRef.setValue(users);
             }
         });
 
