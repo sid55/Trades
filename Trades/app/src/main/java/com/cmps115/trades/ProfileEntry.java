@@ -1,5 +1,6 @@
 package com.cmps115.trades;
 
+import android.app.Application;
 import android.graphics.Bitmap;
 
 public class ProfileEntry {

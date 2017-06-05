@@ -18,6 +18,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
 import android.provider.Settings;
@@ -39,6 +40,7 @@ public class ProfileLast extends AppCompatActivity {
 
     public final Map<String, ProfileEntry> users = new HashMap<String, ProfileEntry>();
     private static final int SELECTED_PICTURE = 100;
+    public static ProfileEntry currUser;
 
     //View Refs
     private ImageView imageView;
@@ -135,8 +137,8 @@ public class ProfileLast extends AppCompatActivity {
                     startActivity(new Intent(ProfileLast.this, BuySell.class));
 
                     mNewProfileRef = mDatabase.getReference().child("profiles/"+emailName);
-                    ProfileEntry newUser = new ProfileEntry(editName, emailName, phoneName, longitude, latitude, encodedImage);
-                    users.put(emailName, newUser);
+                    currUser = new ProfileEntry(editName, emailName, phoneName, longitude, latitude, encodedImage);
+                    users.put(emailName, currUser);
                     mNewProfileRef.setValue(users);
                 }
                 else if(editFirstName.length() == 0){
