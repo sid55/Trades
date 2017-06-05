@@ -21,12 +21,14 @@ public class SellPage extends AppCompatActivity {
     private DatabaseReference mProfileRef;
     private DatabaseReference mListingRef;
 
- /*   private String writeNewListing(String name, String desc){
+    ProfileEntry newUse= new ProfileEntry("first", "last", "email", "phone", 123, 123);
+
+    private String writeNewListing(String name, String desc){
         String listId;
-        ListingEntry listing = new ListingEntry(name, desc);
+        ListingEntry listing = new ListingEntry(name,newUse,desc);
         mListingRef.push().setValue(listing);
         return listId = mListingRef.getKey();
-    }*/
+    }
 
 
     @Override
@@ -49,7 +51,7 @@ public class SellPage extends AppCompatActivity {
             public void onClick(View view){
                 String lName = vSkill.getText().toString();
                 String lDesc = vDesc.getText().toString();
-                //writeNewListing(lName, lDesc);
+                writeNewListing(lName, lDesc);
 
                 Intent showbuysellpage = new Intent(SellPage.this, BuySell.class);
                 startActivity(showbuysellpage);
