@@ -41,8 +41,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".BuyPage" >
-        </activity>
+        <activity android:name=".BuyPage" />
         <activity android:name=".SellPage" />
         <activity android:name=".BuySell">
             <intent-filter>
@@ -51,11 +50,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".Login" />
         <activity android:name=".ProfileLast" />
-        <activity
+        <!--<activity
             android:name=".MyProfile"
             android:label="@string/title_activity_my_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Login"></activity>-->
     </application>
 
 </manifest>
