@@ -96,4 +96,5 @@
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_profile_last">ProfileLast</string>
     <string name="title_activity_my_profile">MyProfile</string>
+    <string name="title_activity_edit_my_profile">EditMyProfile</string>
 </resources>

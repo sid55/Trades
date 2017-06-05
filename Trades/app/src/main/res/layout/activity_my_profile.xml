@@ -58,4 +58,16 @@
         android:inputType="phone"
         android:hint="Phone #" />
 
+    <Button
+        android:id="@+id/editprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="Edit Profile"
+        android:layout_below="@+id/phonenumber"
+        android:layout_marginTop="40dp"
+        />
+
 </RelativeLayout>
