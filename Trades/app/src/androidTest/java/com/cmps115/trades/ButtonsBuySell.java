@@ -80,6 +80,5 @@ public class ButtonsBuySell {
         //Intent intent = new Intent();
         //intent.setClassName("com.cmps115.trades");
         assertNotNull(activity);
-
     }
 }
