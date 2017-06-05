@@ -22,6 +22,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,29 +56,33 @@ public class ProfileLast extends AppCompatActivity {
     private String phoneName;
     private Bitmap profPic;
 
+    String nameLast;
+    String emailLast;
+
     //Database Refs
     private FirebaseDatabase mDatabase;
     private DatabaseReference mProfileRef;
     private DatabaseReference mListingRef;
 
-    public class ImportAPIData extends Login{
-        Login data = new Login();
-        if((data.name != null) && (data.email != null)){
-            String nameHere = data.name;
-            String email = data.email;
-            emailName = email;
-            editFirstName = name;
-        }
 
+    String nameHere = "No name passed!";
+    String emailHere = "No email passed!";
 
-
-    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_profile_last);
+
+        Login data = new Login();
+        nameHere = data.getName();
+        emailHere = data.getEmail();
+
+
+        Log.i("Print", nameLast + "");
+        Log.i("Print", emailLast + "");
+
 
         //View Refs
         imageView = (ImageView) findViewById(R.id.image);

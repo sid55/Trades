@@ -1,3 +1,5 @@
+//referenced from https://www.youtube.com/watch?v=2PIaGpJMCNs&t=191s
+
 package com.cmps115.trades;
 
 import android.app.Application;
@@ -38,8 +40,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private SignInButton signInBtn;
     private Button logout;
 
-    String name;
-    String email;
+    private String name = "Nada Name";
+    private String email = "Nada Email";
 
     private static final String TAG = "Why is it crashing?";
     private GoogleApiClient apiClient;
@@ -91,7 +93,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             GoogleSignInAccount account = r.getSignInAccount();
 
             name = account.getDisplayName();
+            Log.i("Login", name + "");
             email = account.getEmail();
+            Log.i("Login", email + "");
             switchToProfile();
 
         }
@@ -103,8 +107,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
     public void switchToProfile(){
         Intent i = new Intent(Login.this, ProfileLast.class);
+        i.putExtra("Name", getName());
+        i.putExtra("Email", getEmail());
         startActivity(i);
 
+    }
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
 
