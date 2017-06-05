@@ -15,9 +15,9 @@ public class ListingEntry {
 
     }
 
-    public ListingEntry(String name, String desc){
+    public ListingEntry(String name, ProfileEntry lister, String desc){
         this.name= name;
-        //this.lister= lister; add ProfileEntry lister to parameters
+        this.lister= lister;
         this.description= desc;
     }
 
