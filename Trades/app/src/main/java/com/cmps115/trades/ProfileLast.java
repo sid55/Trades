@@ -52,8 +52,8 @@ public class ProfileLast extends AppCompatActivity {
     private String emailName;
     private String phoneName;
     private Bitmap profPic;
-    private double latitude = 3.2;
-    private double longitude = 5.4;
+    private double latitude;
+    private double longitude;
 
     //Database Refs
     private FirebaseDatabase mDatabase;
@@ -77,6 +77,7 @@ public class ProfileLast extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+                textView.setText("Lat: " + location.getLatitude() + "Long: " + location.getLongitude());
             }
 
             @Override
@@ -118,8 +119,8 @@ public class ProfileLast extends AppCompatActivity {
                 //Even though there is an error, the permission check is taken care of
                 //in the above code. Thus, there will never be an error here.
 
-  //              locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
-  //              double latitude = location.getLatitude();
+                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+
 
                 startActivity(new Intent(ProfileLast.this, BuySell.class));
 
@@ -167,7 +168,7 @@ public class ProfileLast extends AppCompatActivity {
                 //Even though there is an error, the permission check is taken care of
                 //at the place the method is called
 
-    //            locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
             }
         });
     }
