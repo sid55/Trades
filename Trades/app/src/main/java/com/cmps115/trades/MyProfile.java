@@ -1,8 +1,11 @@
 package com.cmps115.trades;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -36,13 +39,21 @@ public class MyProfile extends AppCompatActivity {
         //initEditProfile();
 
         //View Refs
-        imageView = (ImageView) findViewById(R.id.image);
+        imageView = (ImageView) findViewById(R.id.profileimage);
         name = (TextView) findViewById(R.id.first);
         email = (TextView) findViewById(R.id.email);
         phone = (TextView) findViewById(R.id.phonenumber);
 
+        //decode encoded image from server and paste into imageView
+        String encodedString = ProfileLast.currUser.getMyImage();
+        byte[] decodedString = Base64.decode(encodedString, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imageView.setImageBitmap(decodedByte);
+
+        String emailEDU = ProfileLast.currUser.getEmail()+".edu";
+
         name.setText(ProfileLast.currUser.getName());
-        email.setText(ProfileLast.currUser.getEmail()+".edu");
+        email.setText(emailEDU);
         phone.setText(ProfileLast.currUser.getPhone());
     }
 }
