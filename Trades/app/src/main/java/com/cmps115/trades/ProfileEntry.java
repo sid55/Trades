@@ -60,7 +60,7 @@ public class ProfileEntry {
     }
 
     //Accessors
-    public String getname(){
+    public String getName(){
         return name;
     }
 

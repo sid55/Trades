@@ -31,7 +31,7 @@ public class ListingAdapter extends ArrayAdapter<ListingEntry> {
 
         skill.setText(listing.getName());
 
-        username.setText(listing.getLister().getEmail());
+        username.setText(listing.getLister().getEmail()+".edu");
 
         description.setText(listing.getDesc());
 
