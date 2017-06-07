@@ -55,21 +55,14 @@ public class ProfileLast extends AppCompatActivity {
     private double longitude;
 
     //String values
-    private String editFirstName = null;
-    private String editLastName;
-    private String editName;
-    private String emailName;
-    private String emailSub;
+    private String editName = "No name passed!";
+    private String emailName = "No email passed!";
     private String phoneName;
     private Bitmap profPic;
 
     //Database Refs
     private FirebaseDatabase mDatabase;
-    private DatabaseReference mProfileRef;
     private DatabaseReference mNewProfileRef;
-
-    String nameHere = "No name passed!";
-    String emailHere = "No email passed!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,27 +73,25 @@ public class ProfileLast extends AppCompatActivity {
 
         //Database References
         mDatabase = FirebaseDatabase.getInstance();
-        mProfileRef = mDatabase.getReference().child("profiles");
 
-        final EditText editFirst = (EditText) findViewById(R.id.firstName);
-        final EditText editLast = (EditText) findViewById(R.id.lastName);
-        final EditText email = (EditText) findViewById(R.id.email);
+        final TextView editFirst = (TextView) findViewById(R.id.firstName);
+        final TextView email = (TextView) findViewById(R.id.email);
 
 
         Bundle ex = getIntent().getExtras();
 
 
-        nameHere = ex.getString("Name-passed");
-        emailHere = ex.getString("Email-passed");
+        editName = ex.getString("Name-passed");
+        emailName = ex.getString("Email-passed");
 
-        emailSub = emailHere.substring(0, emailHere.length() - 4);
-        Log.i("Emailformat" , emailSub + "");
+        emailName = emailName.substring(0, emailName.length() - 4);
+        Log.i("Emailformat" , emailName + "");
 
-        Log.i("PrintPrint", nameHere + "");
-        Log.i("PrintPrint", emailHere + "");
+        Log.i("PrintPrint", editName + "");
+        Log.i("PrintPrint", emailName + "");
 
-        editFirst.setText(nameHere);
-        email.setText(emailSub);
+        editFirst.setText(editName);
+        email.setText(emailName+".edu");
 
 
         //View Refs
@@ -111,19 +102,6 @@ public class ProfileLast extends AppCompatActivity {
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //EditText editFirst = (EditText) findViewById(R.id.firstName);
-                editFirstName = editFirst.getText().toString();
-
-                //EditText editLast = (EditText) findViewById(R.id.lastName);
-                editLastName = editLast.getText().toString();
-
-                editName = editFirstName+" " + editLastName;
-
-                EditText email = (EditText) findViewById(R.id.email);
-
-                emailName = email.getText().toString();
-
-
                 EditText phone = (EditText) findViewById(R.id.phone);
                 phoneName = phone.getText().toString();
 
@@ -141,7 +119,7 @@ public class ProfileLast extends AppCompatActivity {
                 String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(phoneName);
-                if(matcher.matches() && (editFirstName.length() != 0) && (editLastName.length() != 0)){
+                if(matcher.matches() && (editName.length() != 0)){
                     gps = new TrackGPS(ProfileLast.this);
                     if(gps.canGetLocation()){
                         longitude = gps.getLongitude();
@@ -162,12 +140,6 @@ public class ProfileLast extends AppCompatActivity {
 
                     mNewProfileRef.setValue(users);
                 }
-                else if(editFirstName.length() == 0){
-                    Toast.makeText(getApplicationContext(), "First Name Required", Toast.LENGTH_SHORT).show();
-                }
-                else if(editLastName.length() == 0){
-                    Toast.makeText(getApplicationContext(), "Last Name Required", Toast.LENGTH_SHORT).show();
-                }
                 else{
                     Toast.makeText(getApplicationContext(), "Invalid Phone Number", Toast.LENGTH_SHORT).show();
                 }
@@ -175,8 +147,6 @@ public class ProfileLast extends AppCompatActivity {
 
             }
         });
-
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

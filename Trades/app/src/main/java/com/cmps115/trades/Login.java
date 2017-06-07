@@ -33,13 +33,8 @@ import java.util.jar.Attributes;
 
 public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
 
-    private LinearLayout profile;
-    private ImageView picture;
 
-    private TextView username;
-    private TextView user_email;
     private SignInButton signInBtn;
-    private Button logout;
 
     private String name = "Nada Name";
     private String email = "Nada Email";
