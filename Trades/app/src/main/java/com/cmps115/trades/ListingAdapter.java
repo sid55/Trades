@@ -29,7 +29,7 @@ public class ListingAdapter extends ArrayAdapter<ListingEntry> {
         TextView username = (TextView) convertView.findViewById(R.id.User);
         TextView description = (TextView) convertView.findViewById(R.id.Desc);
 
-        skill.setText(listing.getName());
+        skill.setText(listing.getName()+".edu");
 
         username.setText(listing.getLister().getEmail());
 

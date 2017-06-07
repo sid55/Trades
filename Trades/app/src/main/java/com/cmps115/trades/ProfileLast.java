@@ -91,7 +91,7 @@ public class ProfileLast extends AppCompatActivity {
         Log.i("PrintPrint", emailName + "");
 
         editFirst.setText(editName);
-        email.setText(emailName);
+        email.setText(emailName+".edu");
 
 
         //View Refs
