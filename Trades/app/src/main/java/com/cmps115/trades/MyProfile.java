@@ -19,7 +19,7 @@ public class MyProfile extends AppCompatActivity {
     private TextView email;
     private TextView phone;
 
-    /*
+    /* Removed due to time constraints
     public Button editprofilebutton;
     public void initEditProfile(){
         editprofilebutton = (Button) findViewById(R.id.editprofile);
@@ -49,7 +49,7 @@ public class MyProfile extends AppCompatActivity {
         byte[] decodedString = Base64.decode(encodedString, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         imageView.setImageBitmap(decodedByte);
-        
+
         String emailEDU = ProfileLast.currUser.getEmail()+".edu";
 
         name.setText(ProfileLast.currUser.getName());
