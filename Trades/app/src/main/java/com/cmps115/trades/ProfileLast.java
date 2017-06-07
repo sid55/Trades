@@ -111,9 +111,6 @@ public class ProfileLast extends AppCompatActivity {
         saveProf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
                 //EditText editFirst = (EditText) findViewById(R.id.firstName);
                 editFirstName = editFirst.getText().toString();
 
@@ -145,23 +142,16 @@ public class ProfileLast extends AppCompatActivity {
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(phoneName);
                 if(matcher.matches() && (editFirstName.length() != 0) && (editLastName.length() != 0)){
-
                     gps = new TrackGPS(ProfileLast.this);
-
-
                     if(gps.canGetLocation()){
-
                         longitude = gps.getLongitude();
                         latitude = gps.getLatitude();
-
                         //Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
-
                         gps.showSettingsAlert();
                     }
-
 
                     startActivity(new Intent(ProfileLast.this, BuySell.class));
 
